@@ -13,7 +13,6 @@ import java.util.List;
 import br.com.usinasantafe.pom.R;
 import br.com.usinasantafe.pom.control.MotoMecFertCTR;
 import br.com.usinasantafe.pom.model.bean.estaticas.AtividadeBean;
-import br.com.usinasantafe.pom.model.bean.estaticas.BocalBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.ParadaBean;
 import br.com.usinasantafe.pom.model.bean.variaveis.ApontMMFertBean;
 
@@ -57,19 +56,11 @@ public class AdapterListHistorico extends BaseAdapter {
         textViewHistHorario = view.findViewById(R.id.textViewHistHorario);
         textViewHistDetalhes = view.findViewById(R.id.textViewHistDetalhes);
 
-        MotoMecFertCTR motoMecFertCTR = new MotoMecFertCTR();
-
         ApontMMFertBean apontMMFertBean = (ApontMMFertBean) itens.get(position);
         descrApont(apontMMFertBean.getParadaApontMMFert(), apontMMFertBean.getAtivApontMMFert());
         horarioApont(apontMMFertBean.getDthrApontMMFert());
         if(apontMMFertBean.getTransbApontMMFert() > 0){
             textViewHistDetalhes.setText("TRANSBORDO: " + apontMMFertBean.getTransbApontMMFert());
-        }
-        else if(apontMMFertBean.getBocalApontMMFert() > 0){
-            BocalBean bocalBean = motoMecFertCTR.getBocal(apontMMFertBean.getBocalApontMMFert());
-            textViewHistDetalhes.setText("BOCAL: " + bocalBean.getDescrBocal() + "\n" +
-                    "PRESSÃO: " + apontMMFertBean.getPressaoApontMMFert() + "\n" +
-                    "VELOCIDADE: " + apontMMFertBean.getVelocApontMMFert());
         }
         else{
             textViewHistDetalhes.setText("");
@@ -84,11 +75,6 @@ public class AdapterListHistorico extends BaseAdapter {
             AtividadeBean atividadeBean = motoMecFertCTR.getAtividade(idAtiv);
             textViewHistApont.setText("ATIVIDADE: " + atividadeBean.getCodAtiv() + " - " + atividadeBean.getDescrAtiv());
             textViewHistApont.setTextColor(Color.BLUE);
-        }
-        else{
-            ParadaBean paradaBean = motoMecFertCTR.getParada(idParada);
-            textViewHistApont.setText("PARADA: " + paradaBean.getCodParada() + " - " + paradaBean.getDescrParada());
-            textViewHistApont.setTextColor(Color.RED);
         }
     }
 

@@ -46,54 +46,53 @@ public class NetworkChangeListerner extends BroadcastReceiver {
         }
     }
 
-    public void logConfig(){
-        ConfigBean configBean = new ConfigBean();
-        List<ConfigBean> configList = configBean.all();
-        for(ConfigBean configBeanBD : configList){
-            Log.i("PMM", dadosConfig(configBeanBD));
-        }
-    }
-
-    private String dadosConfig(ConfigBean configBean){
-        Gson gsonCabec = new Gson();
-        return gsonCabec.toJsonTree(configBean, configBean.getClass()).toString();
-    }
-
-    public void logProcesso(){
-        LogProcessoBean logProcessoBean = new LogProcessoBean();
-        List<LogProcessoBean> logProcessoList = logProcessoBean.orderBy("idLogProcesso", false);
-        for(LogProcessoBean logProcessoBeanBD : logProcessoList){
-            Log.i("PMM", dadosProcesso(logProcessoBeanBD));
-        }
-    }
-
-    private String dadosProcesso(LogProcessoBean logProcessoBean){
-        Gson gsonCabec = new Gson();
-        return gsonCabec.toJsonTree(logProcessoBean, logProcessoBean.getClass()).toString();
-    }
-
-    public void logErro(){
-        LogErroBean logErroBean = new LogErroBean();
-        List<LogErroBean> logErroList = logErroBean.orderBy("idLogErro", false);
-        Log.i("PMM", "Log Erro");
-        for(LogErroBean logErroBeanBD : logErroList){
-            Log.i("PMM", dadosErro(logErroBeanBD));
-        }
-    }
-
-    private String dadosErro(LogErroBean logErroBean){
-        Gson gsonCabec = new Gson();
-        return gsonCabec.toJsonTree(logErroBean, logErroBean.getClass()).toString();
-    }
-
-    public void logBaseDados(){
-        ConfigCTR configCTR = new ConfigCTR();
-        List<String> logBaseDadoList = configCTR.logBaseDadoList();
-        Log.i("PMM", "Log Base Dados");
-        for(String s : logBaseDadoList){
-            Log.i("PMM", s);
-        }
-    }
-
+//    public void logConfig(){
+//        ConfigBean configBean = new ConfigBean();
+//        List<ConfigBean> configList = configBean.all();
+//        for(ConfigBean configBeanBD : configList){
+//            Log.i("PMM", dadosConfig(configBeanBD));
+//        }
+//    }
+//
+//    private String dadosConfig(ConfigBean configBean){
+//        Gson gsonCabec = new Gson();
+//        return gsonCabec.toJsonTree(configBean, configBean.getClass()).toString();
+//    }
+//
+//    public void logProcesso(){
+//        LogProcessoBean logProcessoBean = new LogProcessoBean();
+//        List<LogProcessoBean> logProcessoList = logProcessoBean.orderBy("idLogProcesso", false);
+//        for(LogProcessoBean logProcessoBeanBD : logProcessoList){
+//            Log.i("PMM", dadosProcesso(logProcessoBeanBD));
+//        }
+//    }
+//
+//    private String dadosProcesso(LogProcessoBean logProcessoBean){
+//        Gson gsonCabec = new Gson();
+//        return gsonCabec.toJsonTree(logProcessoBean, logProcessoBean.getClass()).toString();
+//    }
+//
+//    public void logErro(){
+//        LogErroBean logErroBean = new LogErroBean();
+//        List<LogErroBean> logErroList = logErroBean.orderBy("idLogErro", false);
+//        Log.i("PMM", "Log Erro");
+//        for(LogErroBean logErroBeanBD : logErroList){
+//            Log.i("PMM", dadosErro(logErroBeanBD));
+//        }
+//    }
+//
+//    private String dadosErro(LogErroBean logErroBean){
+//        Gson gsonCabec = new Gson();
+//        return gsonCabec.toJsonTree(logErroBean, logErroBean.getClass()).toString();
+//    }
+//
+//    public void logBaseDados(){
+//        ConfigCTR configCTR = new ConfigCTR();
+//        List<String> logBaseDadoList = configCTR.logBaseDadoList();
+//        Log.i("PMM", "Log Base Dados");
+//        for(String s : logBaseDadoList){
+//            Log.i("PMM", s);
+//        }
+//    }
 
 }

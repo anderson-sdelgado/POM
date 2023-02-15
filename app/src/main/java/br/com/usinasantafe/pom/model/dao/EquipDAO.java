@@ -15,7 +15,6 @@ import java.util.List;
 
 import br.com.usinasantafe.pom.model.bean.estaticas.EquipBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.REquipAtivBean;
-import br.com.usinasantafe.pom.model.bean.estaticas.REquipPneuBean;
 import br.com.usinasantafe.pom.util.VerifDadosServ;
 
 public class EquipDAO {
@@ -71,44 +70,6 @@ public class EquipDAO {
             rEquipAtiv.insert();
         }
 
-    }
-
-    public void recDadosREquipPneu(JSONArray jsonArray) throws JSONException {
-
-        REquipPneuBean rEquipPneuBean = new REquipPneuBean();
-        rEquipPneuBean.deleteAll();
-
-        for (int j = 0; j < jsonArray.length(); j++) {
-            JSONObject objeto = jsonArray.getJSONObject(j);
-            Gson gson = new Gson();
-            REquipPneuBean rEquipPneu = gson.fromJson(objeto.toString(), REquipPneuBean.class);
-            rEquipPneu.insert();
-        }
-
-    }
-
-
-    public String dadosEnvioEquip(){
-
-        EquipBean equipBean = new EquipBean();
-        List<EquipBean> equipList = equipBean.all();
-        JsonArray equipJsonArray = new JsonArray();
-
-        equipBean = equipList.get(0);
-        Gson gson = new Gson();
-        equipJsonArray.add(gson.toJsonTree(equipBean, equipBean.getClass()));
-        equipList.clear();
-
-        JsonObject equipJsonObj = new JsonObject();
-        equipJsonObj.add("equip", equipJsonArray);
-
-        return equipJsonObj.toString();
-
-    }
-
-    public List<REquipPneuBean> rEquipPneuList(){
-        REquipPneuBean rEquipPneuBean = new REquipPneuBean();
-        return rEquipPneuBean.orderBy("posPneu", true);
     }
 
 }

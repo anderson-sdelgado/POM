@@ -14,7 +14,7 @@ public class ComponenteDAO {
         ComponenteBean componenteBean = new ComponenteBean();
         List<ComponenteBean> componenteList = componenteBean.get("idComponente", idCompItemOS);
         if(componenteList.size() > 0){
-            componenteBean = (ComponenteBean) componenteList.get(0);
+            componenteBean =  componenteList.get(0);
         }
         else{
             componenteBean.setCodComponente("0");

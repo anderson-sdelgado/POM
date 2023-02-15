@@ -10,7 +10,6 @@ import java.util.List;
 
 import br.com.usinasantafe.pom.model.bean.AtualAplicBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.EquipBean;
-import br.com.usinasantafe.pom.model.bean.estaticas.PropriedadeBean;
 import br.com.usinasantafe.pom.model.bean.variaveis.ConfigBean;
 import br.com.usinasantafe.pom.util.Tempo;
 
@@ -144,20 +143,6 @@ public class ConfigDAO {
         configBean.update();
     }
 
-    public void setFrentePropriedade(Long idFrente, PropriedadeBean propriedadeBean){
-        ConfigBean configBean = getConfig();
-        configBean.setIdFrenteConfig(idFrente);
-        configBean.setIdPropriedadeConfig(propriedadeBean.getIdPropriedade());
-        configBean.setCodPropriedadeConfig(propriedadeBean.getCodPropriedade());
-        configBean.setDescrPropriedadeConfig(propriedadeBean.getDescrPropriedade());
-        configBean.update();
-    }
-
-    public void setCarreta(Long carreta){
-        ConfigBean configBean = getConfig();
-        configBean.setCarretaConfig(carreta);
-        configBean.update();
-    }
 
     public void setMatricFuncConfig(Long matricFuncConfig) {
         ConfigBean configBean = getConfig();
@@ -171,12 +156,6 @@ public class ConfigDAO {
         configBean.update();
     }
 
-    public void setIdEquipBombaBolConfig(Long idEquipBombaBolConfig) {
-        ConfigBean configBean = getConfig();
-        configBean.setIdTurnoConfig(idEquipBombaBolConfig);
-        configBean.update();
-    }
-
     public void setHodometroInicialConfig(Double hodometroInicialBolMMFert, Double longitudeBolMMFert, Double latitudeBolMMFert) {
         ConfigBean configBean = getConfig();
         configBean.setHodometroInicialConfig(hodometroInicialBolMMFert, longitudeBolMMFert, latitudeBolMMFert);
@@ -186,12 +165,6 @@ public class ConfigDAO {
     public void setHodometroFinalConfig(Double hodometroFinalBolMMFert) {
         ConfigBean configBean = getConfig();
         configBean.setHodometroFinalConfig(hodometroFinalBolMMFert);
-        configBean.update();
-    }
-
-    public void setFuncaoComposto(Long funcaoComposto) {
-        ConfigBean configBean = getConfig();
-        configBean.setFuncaoComposto(funcaoComposto);
         configBean.update();
     }
 

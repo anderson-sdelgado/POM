@@ -11,9 +11,7 @@ import android.util.Log;
 import java.util.HashMap;
 import java.util.Map;
 
-import br.com.usinasantafe.pom.control.CECCTR;
 import br.com.usinasantafe.pom.control.CheckListCTR;
-import br.com.usinasantafe.pom.control.CompostoCTR;
 import br.com.usinasantafe.pom.control.ConfigCTR;
 import br.com.usinasantafe.pom.control.MecanicoCTR;
 import br.com.usinasantafe.pom.control.MotoMecFertCTR;
@@ -52,8 +50,6 @@ public class VerifDadosServ {
 
         ConfigCTR configCTR = new ConfigCTR();
         CheckListCTR checkListCTR = new CheckListCTR();
-        CompostoCTR compostoCTR = new CompostoCTR();
-        CECCTR cecCTR = new CECCTR();
         MecanicoCTR mecanicoCTR = new MecanicoCTR();
         MotoMecFertCTR motoMecFertCTR = new MotoMecFertCTR();
         LogProcessoDAO.getInstance().insertLogProcesso("public void manipularDadosHttp(String result) {", activity);
@@ -86,22 +82,10 @@ public class VerifDadosServ {
             LogProcessoDAO.getInstance().insertLogProcesso("} else if (this.tipo.equals(\"CheckList\")) {\n" +
                     "            checkListCTR.receberVerifCheckList(" + result + ");", activity);
             checkListCTR.receberVerifCheckList(result);
-        } else if(this.classe.equals("OrdCarreg")) {
-            LogProcessoDAO.getInstance().insertLogProcesso("} else if(this.tipo.equals(\"OrdCarreg\")) {\n" +
-                    "            compostoCTR.receberVerifOrdCarreg(" + result + ");", activity);
-            compostoCTR.receberVerifOrdCarreg(result, activity);
-        } else if (this.classe.equals("CEC")) {
-            LogProcessoDAO.getInstance().insertLogProcesso("} else if (this.tipo.equals(\"CEC\")) {\n" +
-                    "            cecCTR.receberVerifCEC(" + result + ");", activity);
-            cecCTR.receberVerifCEC(result);
         } else if (this.classe.equals("OSMecan")) {
             LogProcessoDAO.getInstance().insertLogProcesso("} else if (this.tipo.equals(\"OS\")) {\n" +
                     "            configCTR.receberVerifOS(" + result + ");", activity);
             mecanicoCTR.receberVerifOSMecan(result);
-        } else if (this.classe.equals("Pneu")) {
-            LogProcessoDAO.getInstance().insertLogProcesso("} else if (this.tipo.equals(\"Pneu\")) {\n" +
-                    "            motoMecFertCTR.receberVerifPneu(" + result + ");", activity);
-            motoMecFertCTR.receberVerifPneu(result);
         } else {
             LogProcessoDAO.getInstance().insertLogProcesso("} else {\n" +
                     "            status = 1;", activity);

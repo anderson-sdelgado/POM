@@ -258,62 +258,19 @@ public class DataHoraActivity extends ActivityGeneric {
                                         , pmmContext.getConfigCTR().getHora(), pmmContext.getConfigCTR().getMinuto()));
 
                                 if (pmmContext.getConfigCTR().getConfig().getPosicaoTela() == 1L) {
-                                    LogProcessoDAO.getInstance().insertLogProcesso("if (pmmContext.getConfigCTR().getConfig().getPosicaoTela() == 1L) {", getLocalClassName());
-                                    if(POMContext.aplic == 2) {
-
-                                        LogProcessoDAO.getInstance().insertLogProcesso("if(POMContext.aplic == 2){", getLocalClassName());
-                                        if (connectNetwork) {
-                                            LogProcessoDAO.getInstance().insertLogProcesso("if (connectNetwork) {\n" +
-                                                    "pmmContext.getConfigCTR().setStatusConConfig(1L);", getLocalClassName());
-                                            pmmContext.getConfigCTR().setStatusConConfig(1L);
-                                        }
-                                        else{
-                                            LogProcessoDAO.getInstance().insertLogProcesso("else{\n" +
-                                                    "pmmContext.getConfigCTR().setStatusConConfig(0L);", getLocalClassName());
-                                            pmmContext.getConfigCTR().setStatusConConfig(0L);
-                                        }
-                                        LogProcessoDAO.getInstance().insertLogProcesso("Intent it = new Intent(ListaTurnoActivity.this, ListaAtividadeActivity.class);", getLocalClassName());
-                                        it = new Intent(DataHoraActivity.this, ListaAtividadeActivity.class);
-                                        startActivity(it);
-                                        finish();
-
-                                    } else if(POMContext.aplic == 3){
-                                        LogProcessoDAO.getInstance().insertLogProcesso("} else if(POMContext.aplic == 3){\n" +
-                                                "                                        it = new Intent(DataHoraActivity.this, OSActivity.class);", getLocalClassName());
-                                        it = new Intent(DataHoraActivity.this, ListaFuncaoCompActivity.class);
-                                        startActivity(it);
-                                        finish();
-                                    } else {
-                                        LogProcessoDAO.getInstance().insertLogProcesso("else {\n" +
-                                                "                                        it = new Intent(DataHoraActivity.this, OSActivity.class);", getLocalClassName());
-                                        it = new Intent(DataHoraActivity.this, OSActivity.class);
-                                        startActivity(it);
-                                        finish();
-                                    }
+                                    LogProcessoDAO.getInstance().insertLogProcesso("if (pmmContext.getConfigCTR().getConfig().getPosicaoTela() == 1L) {\n" +
+                                            "                                        it = new Intent(DataHoraActivity.this, OSActivity.class);", getLocalClassName());
+                                    it = new Intent(DataHoraActivity.this, OSActivity.class);
+                                    startActivity(it);
+                                    finish();
                                 }
                                 else {
-                                    if(POMContext.aplic == 1){
-                                        LogProcessoDAO.getInstance().insertLogProcesso("else {\n" +
-                                                "                                    if(POMContext.aplic == 1){\n" +
-                                                "                                        it = new Intent(DataHoraActivity.this, MenuPrincPMMActivity.class);", getLocalClassName());
-                                        it = new Intent(DataHoraActivity.this, MenuPrincPMMActivity.class);
-                                        startActivity(it);
-                                        finish();
-                                    }
-                                    else if(POMContext.aplic == 2){
-                                        LogProcessoDAO.getInstance().insertLogProcesso("else if(POMContext.aplic == 2){\n" +
-                                                "                                        it = new Intent(DataHoraActivity.this, MenuPrincECMActivity.class);", getLocalClassName());
-                                        it = new Intent(DataHoraActivity.this, MenuPrincECMActivity.class);
-                                        startActivity(it);
-                                        finish();
-                                    }
-                                    else if(POMContext.aplic == 3){
-                                        LogProcessoDAO.getInstance().insertLogProcesso("else if(POMContext.aplic == 3){\n" +
-                                                "                                        it = new Intent(DataHoraActivity.this, MenuPrincPCOMPActivity.class);", getLocalClassName());
-                                        it = new Intent(DataHoraActivity.this, MenuPrincPCOMPActivity.class);
-                                        startActivity(it);
-                                        finish();
-                                    }
+                                    LogProcessoDAO.getInstance().insertLogProcesso("else {\n" +
+                                            "                                    if(POMContext.aplic == 1){\n" +
+                                            "                                        it = new Intent(DataHoraActivity.this, MenuPrincPMMActivity.class);", getLocalClassName());
+                                    it = new Intent(DataHoraActivity.this, MenuPrincActivity.class);
+                                    startActivity(it);
+                                    finish();
                                 }
                             }
                             else{

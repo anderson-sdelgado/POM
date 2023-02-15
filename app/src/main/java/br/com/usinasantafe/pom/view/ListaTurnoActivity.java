@@ -159,40 +159,11 @@ public class ListaTurnoActivity extends ActivityGeneric {
 
                 if(Tempo.getInstance().verDthrServ(pmmContext.getConfigCTR().getConfig().getDtServConfig())){
                     LogProcessoDAO.getInstance().insertLogProcesso("if(Tempo.getInstance().verDthrServ(pmmContext.getConfigCTR().getConfig().getDtServConfig())){\n" +
-                            "pmmContext.getConfigCTR().setDifDthrConfig(0L);", getLocalClassName());
+                            "pmmContext.getConfigCTR().setDifDthrConfig(0L);\n" +
+                            "                        Intent it = new Intent(ListaTurnoActivity.this, OSActivity.class);", getLocalClassName());
                     pmmContext.getConfigCTR().setDifDthrConfig(0L);
-                    if(POMContext.aplic == 2){
-                        LogProcessoDAO.getInstance().insertLogProcesso("if(POMContext.aplic == 2){", getLocalClassName());
-                        if (connectNetwork) {
-                            LogProcessoDAO.getInstance().insertLogProcesso("if (connectNetwork) {\n" +
-                                    "pmmContext.getConfigCTR().setStatusConConfig(1L);", getLocalClassName());
-                            pmmContext.getConfigCTR().setStatusConConfig(1L);
-                        }
-                        else{
-                            LogProcessoDAO.getInstance().insertLogProcesso("else{\n" +
-                                    "pmmContext.getConfigCTR().setStatusConConfig(0L);", getLocalClassName());
-                            pmmContext.getConfigCTR().setStatusConConfig(0L);
-                        }
-                        LogProcessoDAO.getInstance().insertLogProcesso("Intent it = new Intent(ListaTurnoActivity.this, ListaAtividadeActivity.class);", getLocalClassName());
-                        Intent it = new Intent(ListaTurnoActivity.this, ListaAtividadeActivity.class);
-                        startActivity(it);
-                        finish();
-
-                    } else if(POMContext.aplic == 3){
-
-                        LogProcessoDAO.getInstance().insertLogProcesso("} else {\n" +
-                                "                        Intent it = new Intent(ListaTurnoActivity.this, OSActivity.class);", getLocalClassName());
-                        Intent it = new Intent(ListaTurnoActivity.this, ListaFuncaoCompActivity.class);
-                        startActivity(it);
-                        finish();
-
-                    } else {
-                        LogProcessoDAO.getInstance().insertLogProcesso("} else {\n" +
-                                "                        Intent it = new Intent(ListaTurnoActivity.this, OSActivity.class);", getLocalClassName());
-                        Intent it = new Intent(ListaTurnoActivity.this, OSActivity.class);
-                        startActivity(it);
-                        finish();
-                    }
+                    Intent it = new Intent(ListaTurnoActivity.this, OSActivity.class);
+                    startActivity(it);
                 } else {
                     LogProcessoDAO.getInstance().insertLogProcesso("else{\n" +
                             "pmmContext.getConfigCTR().setContDataHora(1);", getLocalClassName());
@@ -200,8 +171,8 @@ public class ListaTurnoActivity extends ActivityGeneric {
                     LogProcessoDAO.getInstance().insertLogProcesso("Intent it = new Intent(ListaTurnoActivity.this, MsgDataHoraActivity.class);", getLocalClassName());
                     Intent it = new Intent(ListaTurnoActivity.this, MsgDataHoraActivity.class);
                     startActivity(it);
-                    finish();
                 }
+                finish();
 
             }
 

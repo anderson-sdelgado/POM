@@ -47,7 +47,6 @@ public class LogProcessoActivity extends ActivityGeneric {
         });
 
         buttonRetLogProcesso.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 LogProcessoDAO.getInstance().insertLogProcesso("buttonRetLogProcesso.setOnClickListener(new View.OnClickListener() {\n" +
@@ -63,21 +62,7 @@ public class LogProcessoActivity extends ActivityGeneric {
                 else if (pomContext.getConfigCTR().getConfig().getPosicaoTela() == 23L){
                     LogProcessoDAO.getInstance().insertLogProcesso("else if (pomContext.getConfigCTR().getConfig().getPosicaoTela() == 23L){\n" +
                             "Intent it = new Intent(LogProcessoActivity.this, MenuPrincPMMActivity.class);", getLocalClassName());
-                    Intent it = new Intent(LogProcessoActivity.this, MenuPrincPMMActivity.class);
-                    startActivity(it);
-                    finish();
-                }
-                else if (pomContext.getConfigCTR().getConfig().getPosicaoTela() == 24L){
-                    LogProcessoDAO.getInstance().insertLogProcesso("else if (pomContext.getConfigCTR().getConfig().getPosicaoTela() == 23L){\n" +
-                            "Intent it = new Intent(LogProcessoActivity.this, MenuPrincECMActivity.class);", getLocalClassName());
-                    Intent it = new Intent(LogProcessoActivity.this, MenuPrincECMActivity.class);
-                    startActivity(it);
-                    finish();
-                }
-                else {
-                    LogProcessoDAO.getInstance().insertLogProcesso("else {\n" +
-                            "Intent it = new Intent(LogProcessoActivity.this, MenuPrincPCOMPActivity.class);", getLocalClassName());
-                    Intent it = new Intent(LogProcessoActivity.this, MenuPrincPCOMPActivity.class);
+                    Intent it = new Intent(LogProcessoActivity.this, MenuPrincActivity.class);
                     startActivity(it);
                     finish();
                 }

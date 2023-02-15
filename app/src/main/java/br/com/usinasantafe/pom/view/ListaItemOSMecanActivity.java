@@ -22,7 +22,7 @@ public class ListaItemOSMecanActivity extends ActivityGeneric {
 
     private ListView itemOSListView;
     private List<ItemOSMecanBean> itemOSList;
-    private POMContext pmmContext;
+    private POMContext pomContext;
     private ProgressDialog progressBar;
 
     @Override
@@ -30,27 +30,27 @@ public class ListaItemOSMecanActivity extends ActivityGeneric {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_item_os_mecan);
 
-        pmmContext = (POMContext) getApplication();
+        pomContext = (POMContext) getApplication();
 
         Button buttonRetItemOS = findViewById(R.id.buttonRetItemOS);
         Button buttonAtualItemOS = findViewById(R.id.buttonAtualItemOS);
 
-        LogProcessoDAO.getInstance().insertLogProcesso("itemOSList = pmmContext.getMecanicoCTR().itemOSMecanList();\n" +
+        LogProcessoDAO.getInstance().insertLogProcesso("itemOSList = pomContext.getMecanicoCTR().itemOSMecanList();\n" +
                 "        ArrayList<String> itens = new ArrayList<String>();", getLocalClassName());
-        itemOSList = pmmContext.getMecanicoCTR().itemOSMecanList();
+        itemOSList = pomContext.getMecanicoCTR().itemOSMecanList();
         ArrayList<String> itens = new ArrayList<String>();
 
         LogProcessoDAO.getInstance().insertLogProcesso("for(ItemOSMecanBean itemOSBean : itemOSList){\n" +
                 "            itens.add(itemOSBean.getSeqItemOS() + \" - \"\n" +
-                "                    + pmmContext.getMecanicoCTR().getServico(itemOSBean.getIdServItemOS()).getDescrServico() + \" - \"\n" +
-                "                    + pmmContext.getMecanicoCTR().getComponente(itemOSBean.getIdCompItemOS()).getCodComponente() + \" - \"\n" +
-                "                    + pmmContext.getMecanicoCTR().getComponente(itemOSBean.getIdCompItemOS()).getDescrComponente());\n" +
+                "                    + pomContext.getMecanicoCTR().getServico(itemOSBean.getIdServItemOS()).getDescrServico() + \" - \"\n" +
+                "                    + pomContext.getMecanicoCTR().getComponente(itemOSBean.getIdCompItemOS()).getCodComponente() + \" - \"\n" +
+                "                    + pomContext.getMecanicoCTR().getComponente(itemOSBean.getIdCompItemOS()).getDescrComponente());\n" +
                 "        }", getLocalClassName());
         for(ItemOSMecanBean itemOSBean : itemOSList){
             itens.add(itemOSBean.getSeqItemOS() + " - "
-                    + pmmContext.getMecanicoCTR().getServico(itemOSBean.getIdServItemOS()).getDescrServico() + " - "
-                    + pmmContext.getMecanicoCTR().getComponente(itemOSBean.getIdCompItemOS()).getCodComponente() + " - "
-                    + pmmContext.getMecanicoCTR().getComponente(itemOSBean.getIdCompItemOS()).getDescrComponente());
+                    + pomContext.getMecanicoCTR().getServico(itemOSBean.getIdServItemOS()).getDescrServico() + " - "
+                    + pomContext.getMecanicoCTR().getComponente(itemOSBean.getIdCompItemOS()).getCodComponente() + " - "
+                    + pomContext.getMecanicoCTR().getComponente(itemOSBean.getIdCompItemOS()).getDescrComponente());
         }
 
         buttonAtualItemOS.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +82,7 @@ public class ListaItemOSMecanActivity extends ActivityGeneric {
                     progressBar.show();
 
                     LogProcessoDAO.getInstance().insertLogProcesso("customHandler.removeCallbacks(updateTimerThread)", getLocalClassName());
-                    pmmContext.getMecanicoCTR().atualDados(ListaItemOSMecanActivity.this, ListaItemOSMecanActivity.class, progressBar, "ItemOSMecan", 2, getLocalClassName());
+                    pomContext.getMecanicoCTR().atualDados(ListaItemOSMecanActivity.this, ListaItemOSMecanActivity.class, progressBar, "ItemOSMecan", 2, getLocalClassName());
 
                 } else {
 
@@ -122,16 +122,16 @@ public class ListaItemOSMecanActivity extends ActivityGeneric {
                                     long id) {
 
                 ItemOSMecanBean itemOSBean = itemOSList.get(position);
-                pmmContext.getMecanicoCTR().salvarApontMecan(itemOSBean.getSeqItemOS(), getLocalClassName());
+                pomContext.getMecanicoCTR().salvarApontMecan(itemOSBean.getSeqItemOS(), getLocalClassName());
 
                 LogProcessoDAO.getInstance().insertLogProcesso("itemOSListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {\n" +
                         "            @Override\n" +
                         "            public void onItemClick(AdapterView<?> l, View v, int position,\n" +
                         "                                    long id) {\n" +
                         "                ItemOSMecanBean itemOSBean = itemOSList.get(position);\n" +
-                        "                pmmContext.getMecanicoCTR().salvarApont(itemOSBean.getSeqItemOS(), getLocalClassName());\n" +
-                        "                Intent it = new Intent(ListaItemOSMecanActivity.this, MenuPrincPMMActivity.class);", getLocalClassName());
-                Intent it = new Intent(ListaItemOSMecanActivity.this, MenuPrincPMMActivity.class);
+                        "                pomContext.getMecanicoCTR().salvarApont(itemOSBean.getSeqItemOS(), getLocalClassName());\n" +
+                        "                Intent it = new Intent(ListaItemOSMecanActivity.this, MenuPrincActivity.class);", getLocalClassName());
+                Intent it = new Intent(ListaItemOSMecanActivity.this, MenuPrincActivity.class);
                 startActivity(it);
                 finish();
 

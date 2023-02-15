@@ -80,10 +80,8 @@ public class TelaInicialActivity extends ActivityGeneric {
         pomContext.getMotoMecFertCTR().deleteBolEnviado();
         pomContext.getConfigCTR().deleteLogs();
         if(POMContext.aplic == 1){
-            LogProcessoDAO.getInstance().insertLogProcesso("pomContext.getMotoMecFertCTR().impleMMDelAll();\n" +
-                    "            pomContext.getConfigCTR().osDelAll();\n" +
+            LogProcessoDAO.getInstance().insertLogProcesso("pomContext.getConfigCTR().osDelAll();\n" +
                     "            pomContext.getConfigCTR().rOSAtivDelAll();", getLocalClassName());
-            pomContext.getMotoMecFertCTR().impleMMDelAll();
             pomContext.getConfigCTR().osDelAll();
             pomContext.getConfigCTR().rOSAtivDelAll();
         }
@@ -139,47 +137,11 @@ public class TelaInicialActivity extends ActivityGeneric {
         if(pomContext.getMotoMecFertCTR().verBolAberto()){
             LogProcessoDAO.getInstance().insertLogProcesso("if(pomContext.getMotoMecFertCTR().verBolAberto()){", getLocalClassName());
             if(!pomContext.getCheckListCTR().verCabecAberto()){
-                LogProcessoDAO.getInstance().insertLogProcesso("if(!pomContext.getCheckListCTR().verCabecAberto()){", getLocalClassName());
-                if(!pomContext.getMotoMecFertCTR().verifBoletimPneuAberto()){
-                    LogProcessoDAO.getInstance().insertLogProcesso("if(!pomContext.getMotoMecFertCTR().verifBoletimPneuAberto()){\n" +
-                            "                pomContext.getConfigCTR().setPosicaoTela(8L);", getLocalClassName());
-                    pomContext.getConfigCTR().setPosicaoTela(8L);
-
-                    if(POMContext.aplic == 1){
-                        LogProcessoDAO.getInstance().insertLogProcesso("if(POMContext.aplic == 1){\n" +
-                                "Intent it = new Intent(TelaInicialActivity.this, MenuPrincPMMActivity.class)", getLocalClassName());
-                        Intent it = new Intent(TelaInicialActivity.this, MenuPrincPMMActivity.class);
-                        startActivity(it);
-                        finish();
-                    }
-                    else if(POMContext.aplic == 2){
-                        LogProcessoDAO.getInstance().insertLogProcesso("else if(POMContext.aplic == 2){", getLocalClassName());
-                        if(pomContext.getCecCTR().verPreCECAberto()){
-                            LogProcessoDAO.getInstance().insertLogProcesso("pomContext.getCecCTR().verPreCECAberto()\n" +
-                                    "clearPreCECAberto()", getLocalClassName());
-                            pomContext.getCecCTR().clearPreCECAberto();
-                        }
-                        LogProcessoDAO.getInstance().insertLogProcesso("Intent it = new Intent(TelaInicialActivity.this, MenuPrincECMActivity.class)", getLocalClassName());
-                        Intent it = new Intent(TelaInicialActivity.this, MenuPrincECMActivity.class);
-                        startActivity(it);
-                        finish();
-                    }
-                    else if(POMContext.aplic == 3){
-                        LogProcessoDAO.getInstance().insertLogProcesso("else if(POMContext.aplic == 3){\n" +
-                                "Intent it = new Intent(TelaInicialActivity.this, MenuPrincPCOMPActivity.class)", getLocalClassName());
-                        Intent it = new Intent(TelaInicialActivity.this, MenuPrincPCOMPActivity.class);
-                        startActivity(it);
-                        finish();
-                    }
-                }
-                else{
-                    LogProcessoDAO.getInstance().insertLogProcesso("}\n" +
-                            "        else{\n" +
-                            "Intent it = new Intent(TelaInicialActivity.this, ListaPosPneuActivity.class);", getLocalClassName());
-                    Intent it = new Intent(TelaInicialActivity.this, ListaPosPneuActivity.class);
-                    startActivity(it);
-                    finish();
-                }
+                LogProcessoDAO.getInstance().insertLogProcesso("if(!pomContext.getCheckListCTR().verCabecAberto()){\n" +
+                        "Intent it = new Intent(TelaInicialActivity.this, MenuPrincPMMActivity.class)", getLocalClassName());
+                pomContext.getConfigCTR().setPosicaoTela(8L);
+                Intent it = new Intent(TelaInicialActivity.this, MenuPrincActivity.class);
+                startActivity(it);
             }
             else {
                 LogProcessoDAO.getInstance().insertLogProcesso("else {\n" +
@@ -190,7 +152,6 @@ public class TelaInicialActivity extends ActivityGeneric {
                 pomContext.getCheckListCTR().setPosCheckList(1);
                 Intent it = new Intent(TelaInicialActivity.this, ItemCheckListActivity.class);
                 startActivity(it);
-                finish();
             }
         }
         else{
@@ -199,38 +160,36 @@ public class TelaInicialActivity extends ActivityGeneric {
                     "Intent it = new Intent(TelaInicialActivity.this, MenuInicialActivity.class);", getLocalClassName());
             Intent it = new Intent(TelaInicialActivity.this, MenuInicialActivity.class);
             startActivity(it);
-            finish();
         }
+        finish();
 
     }
 
-    public void logProcesso(){
-        LogProcessoBean logProcessoBean = new LogProcessoBean();
-        List<LogProcessoBean> logProcessoList = logProcessoBean.orderBy("idLogProcesso", false);
-        for(LogProcessoBean logProcessoBeanBD : logProcessoList){
-            Log.i("PMM", dadosProcesso(logProcessoBeanBD));
-        }
-    }
-
-    private String dadosProcesso(LogProcessoBean logProcessoBean){
-        Gson gsonCabec = new Gson();
-        return gsonCabec.toJsonTree(logProcessoBean, logProcessoBean.getClass()).toString();
-    }
-
-    public void logErro(){
-        LogErroBean logErroBean = new LogErroBean();
-        List<LogErroBean> logErroList = logErroBean.orderBy("idLogErro", false);
-        Log.i("PMM", "Log Erro");
-        for(LogErroBean logErroBeanBD : logErroList){
-            Log.i("PMM", dadosErro(logErroBeanBD));
-        }
-    }
-
-
-    private String dadosErro(LogErroBean logErroBean){
-        Gson gsonCabec = new Gson();
-        return gsonCabec.toJsonTree(logErroBean, logErroBean.getClass()).toString();
-    }
-
-
+//    public void logProcesso(){
+//        LogProcessoBean logProcessoBean = new LogProcessoBean();
+//        List<LogProcessoBean> logProcessoList = logProcessoBean.orderBy("idLogProcesso", false);
+//        for(LogProcessoBean logProcessoBeanBD : logProcessoList){
+//            Log.i("PMM", dadosProcesso(logProcessoBeanBD));
+//        }
+//    }
+//
+//    private String dadosProcesso(LogProcessoBean logProcessoBean){
+//        Gson gsonCabec = new Gson();
+//        return gsonCabec.toJsonTree(logProcessoBean, logProcessoBean.getClass()).toString();
+//    }
+//
+//    public void logErro(){
+//        LogErroBean logErroBean = new LogErroBean();
+//        List<LogErroBean> logErroList = logErroBean.orderBy("idLogErro", false);
+//        Log.i("PMM", "Log Erro");
+//        for(LogErroBean logErroBeanBD : logErroList){
+//            Log.i("PMM", dadosErro(logErroBeanBD));
+//        }
+//    }
+//
+//    private String dadosErro(LogErroBean logErroBean){
+//        Gson gsonCabec = new Gson();
+//        return gsonCabec.toJsonTree(logErroBean, logErroBean.getClass()).toString();
+//    }
+//
 }

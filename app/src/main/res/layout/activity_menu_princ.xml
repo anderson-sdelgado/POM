@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_menu_atividade"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -9,26 +9,29 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".view.ListaTipoMovLeiraActivity">
+    tools:telaAtual="br.com.usinasantafe.pom.view.MenuPrincActivity">
 
     <TextView
-        android:id="@+id/textViewTituloTipoComp"
+        android:id="@+id/textViewTituloMenuPrinc"
         style="@style/TextViewTituloLista"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/texto_atividade" />
+        android:text="@string/texto_lista_menu_princ" />
 
     <ListView
-        android:id="@+id/listTipoComp"
+        android:id="@+id/listViewMenuPrinc"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <Button
-        android:id="@+id/buttonRetTipoComp"
-        style="@style/BotaoAvulso"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/texto_padrao_retornar" />
+    <TextView
+        android:id="@+id/textViewDataHora"
+        style="@style/TextViewItemList"
+        android:text="@string/texto_item_list" />
+
+    <TextView
+        android:id="@+id/textViewProcessoNormal"
+        style="@style/TextViewItemList"
+        android:text="@string/texto_item_list" />
 
 </LinearLayout>

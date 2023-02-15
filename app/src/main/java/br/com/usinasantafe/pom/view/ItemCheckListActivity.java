@@ -109,39 +109,13 @@ public class ItemCheckListActivity extends ActivityGeneric {
             if (pomContext.getCheckListCTR().qtdeItemCheckList() == pomContext.getCheckListCTR().getPosCheckList()) {
                 LogProcessoDAO.getInstance().insertLogProcesso("if (pomContext.getCheckListCTR().qtdeItemCheckList() == pomContext.getCheckListCTR().getPosCheckList()) {\n" +
                         "                pomContext.getConfigCTR().setCheckListConfig(pomContext.getConfigCTR().getConfig().getIdTurnoConfig());\n" +
-                        "                pomContext.getCheckListCTR().salvarBolFechado();", getLocalClassName());
+                        "                pomContext.getCheckListCTR().salvarBolFechado();\n" +
+                        "                Intent it = new Intent(ItemCheckListActivity.this, MenuPrincPMMActivity.class);", getLocalClassName());
                 pomContext.getConfigCTR().setCheckListConfig(pomContext.getConfigCTR().getConfig().getIdTurnoConfig());
                 pomContext.getCheckListCTR().salvarBolFechado(getLocalClassName());
-                if (pomContext.getConfigCTR().getConfig().getPosicaoTela() == 1L) {
-                    LogProcessoDAO.getInstance().insertLogProcesso("if (pomContext.getConfigCTR().getConfig().getPosicaoTela() == 1L) {", getLocalClassName());
-                    if(POMContext.aplic == 1){
-                        LogProcessoDAO.getInstance().insertLogProcesso("if(POMContext.aplic == 1){\n" +
-                                "                Intent it = new Intent(ItemCheckListActivity.this, MenuPrincPMMActivity.class);", getLocalClassName());
-                        Intent it = new Intent(ItemCheckListActivity.this, MenuPrincPMMActivity.class);
-                        startActivity(it);
-                        finish();
-                    }
-                    else if(POMContext.aplic == 2){
-                        LogProcessoDAO.getInstance().insertLogProcesso("else if(POMContext.aplic == 2){\n" +
-                                "                Intent it = new Intent(ItemCheckListActivity.this, MenuPrincECMActivity.class);", getLocalClassName());
-                        Intent it = new Intent(ItemCheckListActivity.this, MenuPrincECMActivity.class);
-                        startActivity(it);
-                        finish();
-                    }
-                    else if(POMContext.aplic == 3){
-                        LogProcessoDAO.getInstance().insertLogProcesso("else if(POMContext.aplic == 3){\n" +
-                                "                Intent it = new Intent(ItemCheckListActivity.this, MenuPrincPCOMPActivity.class);", getLocalClassName());
-                        Intent it = new Intent(ItemCheckListActivity.this, MenuPrincPCOMPActivity.class);
-                        startActivity(it);
-                        finish();
-                    }
-                } else {
-                    LogProcessoDAO.getInstance().insertLogProcesso("} else {\n" +
-                            "                    Intent it = new Intent(ItemCheckListActivity.this, VerifOperadorActivity.class);", getLocalClassName());
-                    Intent it = new Intent(ItemCheckListActivity.this, VerifOperadorActivity.class);
-                    startActivity(it);
-                    finish();
-                }
+                Intent it = new Intent(ItemCheckListActivity.this, MenuPrincActivity.class);
+                startActivity(it);
+                finish();
             } else {
                 LogProcessoDAO.getInstance().insertLogProcesso("pomContext.getCheckListCTR().setPosCheckList(pomContext.getCheckListCTR().getPosCheckList() + 1);\n" +
                         "                itemCheckListBean = (ItemCheckListBean) itemCheckListList.get(pomContext.getCheckListCTR().getPosCheckList() - 1);\n" +
@@ -150,38 +124,12 @@ public class ItemCheckListActivity extends ActivityGeneric {
                 itemCheckListBean = (ItemCheckListBean) itemCheckListList.get(pomContext.getCheckListCTR().getPosCheckList() - 1);
                 textViewItemChecklist.setText(pomContext.getCheckListCTR().getPosCheckList() + " - " + itemCheckListBean.getDescrItemCheckList());
             }
-        }
-        else{
-            if (pomContext.getConfigCTR().getConfig().getPosicaoTela() == 1L) {
-                LogProcessoDAO.getInstance().insertLogProcesso("if (pomContext.getConfigCTR().getConfig().getPosicaoTela() == 1L) {", getLocalClassName());
-                if(POMContext.aplic == 1){
-                    LogProcessoDAO.getInstance().insertLogProcesso("if(POMContext.aplic == 1){\n" +
-                            "                Intent it = new Intent(ItemCheckListActivity.this, MenuPrincPMMActivity.class);", getLocalClassName());
-                    Intent it = new Intent(ItemCheckListActivity.this, MenuPrincPMMActivity.class);
-                    startActivity(it);
-                    finish();
-                }
-                else if(POMContext.aplic == 2){
-                    LogProcessoDAO.getInstance().insertLogProcesso("else if(POMContext.aplic == 2){\n" +
-                            "                Intent it = new Intent(ItemCheckListActivity.this, MenuPrincECMActivity.class);", getLocalClassName());
-                    Intent it = new Intent(ItemCheckListActivity.this, MenuPrincECMActivity.class);
-                    startActivity(it);
-                    finish();
-                }
-                else if(POMContext.aplic == 3){
-                    LogProcessoDAO.getInstance().insertLogProcesso("else if(POMContext.aplic == 3){\n" +
-                            "                Intent it = new Intent(ItemCheckListActivity.this, MenuPrincPCOMPActivity.class);", getLocalClassName());
-                    Intent it = new Intent(ItemCheckListActivity.this, MenuPrincPCOMPActivity.class);
-                    startActivity(it);
-                    finish();
-                }
-            } else {
-                LogProcessoDAO.getInstance().insertLogProcesso("} else {\n" +
-                        "                Intent it = new Intent(ItemCheckListActivity.this, VerifOperadorActivity.class);", getLocalClassName());
-                Intent it = new Intent(ItemCheckListActivity.this, VerifOperadorActivity.class);
-                startActivity(it);
-                finish();
-            }
+        } else {
+            LogProcessoDAO.getInstance().insertLogProcesso("} else {\n" +
+                    "                Intent it = new Intent(ItemCheckListActivity.this, MenuPrincPMMActivity.class);", getLocalClassName());
+            Intent it = new Intent(ItemCheckListActivity.this, MenuPrincActivity.class);
+            startActivity(it);
+            finish();
         }
 
     }

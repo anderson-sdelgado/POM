@@ -139,7 +139,7 @@ public class OSMecanActivity extends ActivityGeneric {
     public void onBackPressed() {
         LogProcessoDAO.getInstance().insertLogProcesso("public void onBackPressed() {\n" +
                 "        Intent it = new Intent(OSMecanActivity.this, MenuPrincPMMActivity.class);", getLocalClassName());
-        Intent it = new Intent(OSMecanActivity.this, MenuPrincPMMActivity.class);
+        Intent it = new Intent(OSMecanActivity.this, MenuPrincActivity.class);
         startActivity(it);
         finish();
     }

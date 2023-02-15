@@ -12,7 +12,6 @@ import java.util.List;
 import br.com.usinasantafe.pom.model.bean.AtualAplicBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.EquipBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.OSBean;
-import br.com.usinasantafe.pom.model.bean.estaticas.PropriedadeBean;
 import br.com.usinasantafe.pom.model.bean.variaveis.ConfigBean;
 import br.com.usinasantafe.pom.model.bean.variaveis.LogErroBean;
 import br.com.usinasantafe.pom.model.bean.variaveis.LogProcessoBean;
@@ -21,19 +20,11 @@ import br.com.usinasantafe.pom.model.dao.AtividadeDAO;
 import br.com.usinasantafe.pom.model.dao.AtualAplicDAO;
 import br.com.usinasantafe.pom.model.dao.BoletimMMFertDAO;
 import br.com.usinasantafe.pom.model.dao.CabecCheckListDAO;
-import br.com.usinasantafe.pom.model.dao.CarregCompDAO;
 import br.com.usinasantafe.pom.model.dao.ConfigDAO;
 import br.com.usinasantafe.pom.model.dao.EquipDAO;
-import br.com.usinasantafe.pom.model.dao.FrenteDAO;
-import br.com.usinasantafe.pom.model.dao.ImplementoMMDAO;
-import br.com.usinasantafe.pom.model.dao.LeiraDAO;
 import br.com.usinasantafe.pom.model.dao.LogErroDAO;
 import br.com.usinasantafe.pom.model.dao.LogProcessoDAO;
 import br.com.usinasantafe.pom.model.dao.OSDAO;
-import br.com.usinasantafe.pom.model.dao.PropriedadeDAO;
-import br.com.usinasantafe.pom.model.dao.RFuncaoAtivParDAO;
-import br.com.usinasantafe.pom.model.dao.RecolhimentoFertDAO;
-import br.com.usinasantafe.pom.model.dao.RendimentoMMDAO;
 import br.com.usinasantafe.pom.model.dao.RespItemCheckListDAO;
 import br.com.usinasantafe.pom.util.AtualDadosServ;
 import br.com.usinasantafe.pom.util.Json;
@@ -49,9 +40,6 @@ public class ConfigCTR {
     private int ano;
     private int hora;
     private int minuto;
-
-    private String codPropriedade;
-    private Long idFrente;
 
     public ConfigCTR() {
     }
@@ -192,7 +180,6 @@ public class ConfigCTR {
                     EquipDAO equipDAO = new EquipDAO();
                     EquipBean equipBean = equipDAO.recDadosEquip(jsonArray);
                     equipDAO.recDadosREquipAtiv(json.jsonArray(retorno[1]));
-                    equipDAO.recDadosREquipPneu(json.jsonArray(retorno[2]));
 
                     setEquipConfig(equipBean);
 
@@ -230,11 +217,6 @@ public class ConfigCTR {
         configDAO.setIdTurnoConfig(idTurnoConfig);
     }
 
-    public void setIdEquipBombaBolConfig(Long idEquipBombaBolConfig) {
-        ConfigDAO configDAO = new ConfigDAO();
-        configDAO.setIdEquipBombaBolConfig(idEquipBombaBolConfig);
-    }
-
     public void setHodometroInicialConfig(Double hodometroInicialBolMMFert, Double longitudeBolMMFert, Double latitudeBolMMFert) {
         ConfigDAO configDAO = new ConfigDAO();
         configDAO.setHodometroInicialConfig(hodometroInicialBolMMFert, longitudeBolMMFert, latitudeBolMMFert);
@@ -243,16 +225,6 @@ public class ConfigCTR {
     public void setHodometroFinalConfig(Double hodometroFinalBolMMFert) {
         ConfigDAO configDAO = new ConfigDAO();
         configDAO.setHodometroFinalConfig(hodometroFinalBolMMFert);
-    }
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-
-    ////////////////////////////////// OS - ATIVIDADE /////////////////////////////////////////////
-
-    public void clearOSAtiv(){
-        ConfigDAO configDAO = new ConfigDAO();
-        configDAO.setNroOSConfig(0L);
-        configDAO.setAtivConfig(0L);
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -274,11 +246,6 @@ public class ConfigCTR {
             }
         }
         return retorno;
-    }
-
-    public boolean verLib(Long idLib){
-        OSDAO osDAO = new OSDAO();
-        return osDAO.verLib(getConfig().getNroOSConfig(), idLib);
     }
 
     public OSBean getOS(){
@@ -365,9 +332,6 @@ public class ConfigCTR {
                 AtividadeDAO atividadeDAO = new AtividadeDAO();
                 atividadeDAO.recDadosAtiv(json.jsonArray(retorno[2]));
 
-                RFuncaoAtivParDAO rFuncaoAtivParDAO = new RFuncaoAtivParDAO();
-                rFuncaoAtivParDAO.recDadosRFuncaoAtivPar(json.jsonArray(retorno[3]));
-
                 VerifDadosServ.getInstance().pulaTela();
 
             } else {
@@ -394,9 +358,6 @@ public class ConfigCTR {
 
                 AtividadeDAO atividadeDAO = new AtividadeDAO();
                 atividadeDAO.recDadosAtiv(json.jsonArray(retorno[1]));
-
-                RFuncaoAtivParDAO rFuncaoAtivParDAO = new RFuncaoAtivParDAO();
-                rFuncaoAtivParDAO.recDadosRFuncaoAtivPar(json.jsonArray(retorno[2]));
 
                 VerifDadosServ.getInstance().pulaTela();
 
@@ -434,93 +395,6 @@ public class ConfigCTR {
     public void setCheckListConfig(Long idTurno){
         ConfigDAO configDAO = new ConfigDAO();
         configDAO.setCheckListConfig(idTurno);
-    }
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-
-    ///////////////////////////////////// FERTIRRIGAÇÃO ///////////////////////////////////////////
-
-    public void clearDadosFert(){
-        setBocalConfig(0L);
-        setVelocConfig(0L);
-        setPressaoConfig(0D);
-    }
-
-    public void setPressaoConfig(Double pressao){
-        ConfigDAO configDAO = new ConfigDAO();
-        configDAO.setPressaoConfig(pressao);
-    }
-
-    public void setVelocConfig(Long veloc){
-        ConfigDAO configDAO = new ConfigDAO();
-        configDAO.setVelocConfig(veloc);
-    }
-
-    public void setBocalConfig(Long bocal){
-        ConfigDAO configDAO = new ConfigDAO();
-        configDAO.setBocalConfig(bocal);
-    }
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-
-    ////////////////////////////////////// COMPOSTAGEM ////////////////////////////////////////////
-
-
-    public void setFuncaoComposto(Long funcaoComposto) {
-        ConfigDAO configDAO = new ConfigDAO();
-        configDAO.setFuncaoComposto(funcaoComposto);
-    }
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-
-    /////////////////////////////// ECM (FRENTE - PROPRIEDADE) ////////////////////////////////////
-
-    public void setIdFrente(Long codFrente) {
-        FrenteDAO frenteDAO = new FrenteDAO();
-        this.idFrente = frenteDAO.getFrente(codFrente).getIdFrente();
-    }
-
-    public boolean verFrente(Long codFrente){
-        FrenteDAO frenteDAO = new FrenteDAO();
-        return frenteDAO.verFrente(codFrente);
-    }
-
-    public void setCodPropriedade(String codPropriedade) {
-        this.codPropriedade = codPropriedade;
-    }
-
-    public boolean verPropriedade(Long codPropriedade){
-        PropriedadeDAO propriedadeDAO = new PropriedadeDAO();
-        return propriedadeDAO.verPropriedade(codPropriedade);
-    }
-
-    public PropriedadeBean getPropriedade(){
-        return getCodPropriedade(Long.parseLong(this.codPropriedade));
-    }
-
-    public PropriedadeBean getCodPropriedade(Long codPropriedade){
-        PropriedadeDAO propriedadeDAO = new PropriedadeDAO();
-        return propriedadeDAO.getPropriedadeCod(codPropriedade);
-    }
-
-    public void setFrentePropriedade(){
-        ConfigDAO configDAO = new ConfigDAO();
-        configDAO.setFrentePropriedade(idFrente, getCodPropriedade(Long.parseLong(this.codPropriedade)));
-    }
-
-    public String getMsgPropriedade(){
-        String retorno = "";
-        if(getConfig().getIdPropriedadeConfig() == 0L){
-            retorno = "NÃO POSSUE SEÇÃO AINDA";
-        } else {
-            retorno = "SEÇÃO " + getConfig().getCodPropriedadeConfig() + " - " + getConfig().getDescrPropriedadeConfig();
-        }
-        return retorno;
-    }
-
-    public void setCarreta(Long carreta){
-        ConfigDAO configDAO = new ConfigDAO();
-        configDAO.setCarreta(carreta);
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -581,20 +455,10 @@ public class ConfigCTR {
         ArrayList<String> dadosArrayList = new ArrayList<>();
         BoletimMMFertDAO boletimMMFertDAO = new BoletimMMFertDAO();
         ApontMMFertDAO apontMMFertDAO = new ApontMMFertDAO();
-        ImplementoMMDAO implementoMMDAO = new ImplementoMMDAO();
-        RecolhimentoFertDAO recolhimentoFertDAO = new RecolhimentoFertDAO();
-        RendimentoMMDAO rendimentoMMDAO = new RendimentoMMDAO();
-        LeiraDAO leiraDAO = new LeiraDAO();
-        CarregCompDAO carregCompDAO = new CarregCompDAO();
         CabecCheckListDAO cabecCheckListDAO = new CabecCheckListDAO();
         RespItemCheckListDAO respItemCheckListDAO = new RespItemCheckListDAO();
         dadosArrayList = boletimMMFertDAO.boletimAllArrayList(dadosArrayList);
         dadosArrayList = apontMMFertDAO.apontAllArrayList(dadosArrayList);
-        dadosArrayList = implementoMMDAO.apontImplAllArrayList(dadosArrayList);
-        dadosArrayList = recolhimentoFertDAO.recolAllArrayList(dadosArrayList);
-        dadosArrayList = rendimentoMMDAO.rendAllArrayList(dadosArrayList);
-        dadosArrayList = leiraDAO.movLeiraAllArrayList(dadosArrayList);
-        dadosArrayList = carregCompDAO.carregCompAllArrayList(dadosArrayList);
         dadosArrayList = cabecCheckListDAO.cabecCheckListAllArrayList(dadosArrayList);
         dadosArrayList = respItemCheckListDAO.respCheckListAllArrayList(dadosArrayList);
         return dadosArrayList;

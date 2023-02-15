@@ -2,9 +2,7 @@ package br.com.usinasantafe.pom;
 
 import android.app.Application;
 
-import br.com.usinasantafe.pom.control.CECCTR;
 import br.com.usinasantafe.pom.control.CheckListCTR;
-import br.com.usinasantafe.pom.control.CompostoCTR;
 import br.com.usinasantafe.pom.control.ConfigCTR;
 import br.com.usinasantafe.pom.control.MecanicoCTR;
 import br.com.usinasantafe.pom.control.MotoMecFertCTR;
@@ -15,10 +13,8 @@ public class POMContext extends Application {
     private Thread.UncaughtExceptionHandler mDefaultExceptionHandler;
 
     private MotoMecFertCTR motoMecFertCTR;
-    private CECCTR cecCTR;
     private CheckListCTR checkListCTR;
     private ConfigCTR configCTR;
-    private CompostoCTR compostoCTR;
     private MecanicoCTR mecanicoCTR;
 
     public static String versaoWS = "5.01";
@@ -37,13 +33,6 @@ public class POMContext extends Application {
         return motoMecFertCTR;
     }
 
-    public CECCTR getCecCTR() {
-        if (cecCTR == null)
-            cecCTR = new CECCTR();
-        return cecCTR;
-    }
-
-
     public CheckListCTR getCheckListCTR(){
         if (checkListCTR == null)
             checkListCTR = new CheckListCTR();
@@ -54,12 +43,6 @@ public class POMContext extends Application {
         if (configCTR == null)
             configCTR = new ConfigCTR();
         return configCTR;
-    }
-
-    public CompostoCTR getCompostoCTR(){
-        if (compostoCTR == null)
-            compostoCTR = new CompostoCTR();
-        return compostoCTR;
     }
 
     public MecanicoCTR getMecanicoCTR(){

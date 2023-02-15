@@ -89,10 +89,8 @@ public class SenhaActivity extends ActivityGeneric {
                         Intent it = new Intent(SenhaActivity.this, MenuInicialActivity.class);
                         startActivity(it);
                         finish();
-                    }
-                    else{
-                        LogProcessoDAO.getInstance().insertLogProcesso("}\n" +
-                                "                else{", getLocalClassName());
+                    } else {
+                        LogProcessoDAO.getInstance().insertLogProcesso("} else {", getLocalClassName());
                         if (pomContext.getConfigCTR().getConfig().getPosicaoTela() == 12L){
                             LogProcessoDAO.getInstance().insertLogProcesso("if (pomContext.getConfigCTR().getConfig().getPosicaoTela() == 12L){\n" +
                                     "Intent it = new Intent(SenhaActivity.this, TelaInicialActivity.class);", getLocalClassName());
@@ -103,21 +101,7 @@ public class SenhaActivity extends ActivityGeneric {
                         else if (pomContext.getConfigCTR().getConfig().getPosicaoTela() == 23L){
                             LogProcessoDAO.getInstance().insertLogProcesso("else if (pomContext.getConfigCTR().getConfig().getPosicaoTela() == 23L){\n" +
                                     "Intent it = new Intent(SenhaActivity.this, MenuPrincPMMActivity.class);", getLocalClassName());
-                            Intent it = new Intent(SenhaActivity.this, MenuPrincPMMActivity.class);
-                            startActivity(it);
-                            finish();
-                        }
-                        else if (pomContext.getConfigCTR().getConfig().getPosicaoTela() == 24L){
-                            LogProcessoDAO.getInstance().insertLogProcesso("else if (pomContext.getConfigCTR().getConfig().getPosicaoTela() == 23L){\n" +
-                                    "Intent it = new Intent(SenhaActivity.this, MenuPrincECMActivity.class);", getLocalClassName());
-                            Intent it = new Intent(SenhaActivity.this, MenuPrincECMActivity.class);
-                            startActivity(it);
-                            finish();
-                        }
-                        else {
-                            LogProcessoDAO.getInstance().insertLogProcesso("else {\n" +
-                                    "Intent it = new Intent(SenhaActivity.this, MenuPrincPCOMPActivity.class);", getLocalClassName());
-                            Intent it = new Intent(SenhaActivity.this, MenuPrincPCOMPActivity.class);
+                            Intent it = new Intent(SenhaActivity.this, MenuPrincActivity.class);
                             startActivity(it);
                             finish();
                         }

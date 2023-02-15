@@ -41,7 +41,7 @@ public class DigItemOSMecanActivity extends ActivityGeneric {
                                 "                        pomContext.getMecanicoCTR().salvarApont(Long.parseLong(editTextPadrao.getText().toString()), getLocalClassName());\n" +
                                 "                        Intent it = new Intent(DigItemOSMecanActivity.this, MenuPrincPMMActivity.class);", getLocalClassName());
                         pomContext.getMecanicoCTR().salvarApontMecan(Long.parseLong(editTextPadrao.getText().toString()), getLocalClassName());
-                        Intent it = new Intent(DigItemOSMecanActivity.this, MenuPrincPMMActivity.class);
+                        Intent it = new Intent(DigItemOSMecanActivity.this, MenuPrincActivity.class);
                         startActivity(it);
                         finish();
 

@@ -12,38 +12,20 @@ import android.widget.EditText;
 import br.com.usinasantafe.pom.POMContext;
 import br.com.usinasantafe.pom.R;
 import br.com.usinasantafe.pom.model.bean.estaticas.AtividadeBean;
-import br.com.usinasantafe.pom.model.bean.estaticas.BocalBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.EquipBean;
-import br.com.usinasantafe.pom.model.bean.estaticas.EquipSegBean;
-import br.com.usinasantafe.pom.model.bean.estaticas.FrenteBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.FuncBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.ItemCheckListBean;
-import br.com.usinasantafe.pom.model.bean.estaticas.LeiraBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.MotoMecBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.OSBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.ParadaBean;
-import br.com.usinasantafe.pom.model.bean.estaticas.PressaoBocalBean;
-import br.com.usinasantafe.pom.model.bean.estaticas.ProdutoBean;
-import br.com.usinasantafe.pom.model.bean.estaticas.RAtivParadaBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.REquipAtivBean;
-import br.com.usinasantafe.pom.model.bean.estaticas.RFuncaoAtivParBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.ROSAtivBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.TurnoBean;
-import br.com.usinasantafe.pom.model.bean.variaveis.ApontImplMMBean;
 import br.com.usinasantafe.pom.model.bean.variaveis.ApontMMFertBean;
 import br.com.usinasantafe.pom.model.bean.variaveis.BoletimMMFertBean;
-import br.com.usinasantafe.pom.model.bean.variaveis.CECBean;
 import br.com.usinasantafe.pom.model.bean.variaveis.CabecCheckListBean;
-import br.com.usinasantafe.pom.model.bean.variaveis.CarregCompBean;
-import br.com.usinasantafe.pom.model.bean.variaveis.CarretaBean;
 import br.com.usinasantafe.pom.model.bean.variaveis.ConfigBean;
-import br.com.usinasantafe.pom.model.bean.variaveis.InfColheitaBean;
-import br.com.usinasantafe.pom.model.bean.variaveis.InfPlantioBean;
 import br.com.usinasantafe.pom.model.bean.variaveis.LogErroBean;
-import br.com.usinasantafe.pom.model.bean.variaveis.MovLeiraBean;
-import br.com.usinasantafe.pom.model.bean.variaveis.PreCECBean;
-import br.com.usinasantafe.pom.model.bean.variaveis.RecolhFertBean;
-import br.com.usinasantafe.pom.model.bean.variaveis.RendMMBean;
 import br.com.usinasantafe.pom.model.bean.variaveis.RespItemCheckListBean;
 import br.com.usinasantafe.pom.model.dao.LogProcessoDAO;
 
@@ -182,26 +164,14 @@ public class ConfigActivity extends ActivityGeneric {
                 AtividadeBean atividadeBean = new AtividadeBean();
                 atividadeBean.deleteAll();
 
-                BocalBean bocalBean = new BocalBean();
-                bocalBean.deleteAll();
-
                 EquipBean equipBean = new EquipBean();
                 equipBean.deleteAll();
-
-                EquipSegBean equipSegBean = new EquipSegBean();
-                equipSegBean.deleteAll();
-
-                FrenteBean frenteBean = new FrenteBean();
-                frenteBean.deleteAll();
 
                 FuncBean funcBean = new FuncBean();
                 funcBean.deleteAll();
 
                 ItemCheckListBean itemCheckListBean = new ItemCheckListBean();
                 itemCheckListBean.deleteAll();
-
-                LeiraBean leiraBean = new LeiraBean();
-                leiraBean.deleteAll();
 
                 MotoMecBean motoMecBean = new MotoMecBean();
                 motoMecBean.deleteAll();
@@ -212,29 +182,14 @@ public class ConfigActivity extends ActivityGeneric {
                 ParadaBean paradaBean = new ParadaBean();
                 paradaBean.deleteAll();
 
-                PressaoBocalBean pressaoBocalBean = new PressaoBocalBean();
-                pressaoBocalBean.deleteAll();
-
-                ProdutoBean produtoBean = new ProdutoBean();
-                produtoBean.deleteAll();
-
-                RAtivParadaBean rAtivParadaBean = new RAtivParadaBean();
-                rAtivParadaBean.deleteAll();
-
                 REquipAtivBean rEquipAtivBean = new REquipAtivBean();
                 rEquipAtivBean.deleteAll();
-
-                RFuncaoAtivParBean rFuncaoAtivParBean = new RFuncaoAtivParBean();
-                rFuncaoAtivParBean.deleteAll();
 
                 ROSAtivBean rosAtivBean = new ROSAtivBean();
                 rosAtivBean.deleteAll();
 
                 TurnoBean turnoBean = new TurnoBean();
                 turnoBean.deleteAll();
-
-                ApontImplMMBean apontImplMMBean = new ApontImplMMBean();
-                apontImplMMBean.deleteAll();
 
                 ApontMMFertBean apontMMFertBean = new ApontMMFertBean();
                 apontMMFertBean.deleteAll();
@@ -245,38 +200,11 @@ public class ConfigActivity extends ActivityGeneric {
                 CabecCheckListBean cabecCLBean = new CabecCheckListBean();
                 cabecCLBean.deleteAll();
 
-                CarregCompBean carregCompBean = new CarregCompBean();
-                carregCompBean.deleteAll();
-
-                CarretaBean carretaBean = new CarretaBean();
-                carretaBean.deleteAll();
-
-                CECBean cecBean = new CECBean();
-                cecBean.deleteAll();
-
                 ConfigBean configBean = new ConfigBean();
                 configBean.deleteAll();
 
-                InfColheitaBean infColheitaBean = new InfColheitaBean();
-                infColheitaBean.deleteAll();
-
-                InfPlantioBean infPlantioBean = new InfPlantioBean();
-                infPlantioBean.deleteAll();
-
                 LogErroBean logErroBean = new LogErroBean();
                 logErroBean.deleteAll();
-
-                MovLeiraBean movLeiraBean = new MovLeiraBean();
-                movLeiraBean.deleteAll();
-
-                PreCECBean preCECBean = new PreCECBean();
-                preCECBean.deleteAll();
-
-                RecolhFertBean recolhFertBean = new RecolhFertBean();
-                recolhFertBean.deleteAll();
-
-                RendMMBean rendMMBean = new RendMMBean();
-                rendMMBean.deleteAll();
 
                 RespItemCheckListBean respItemCLBean = new RespItemCheckListBean();
                 respItemCLBean.deleteAll();
