@@ -15,7 +15,6 @@ import br.com.usinasantafe.pom.model.bean.estaticas.OSBean;
 import br.com.usinasantafe.pom.model.bean.variaveis.ConfigBean;
 import br.com.usinasantafe.pom.model.bean.variaveis.LogErroBean;
 import br.com.usinasantafe.pom.model.bean.variaveis.LogProcessoBean;
-import br.com.usinasantafe.pom.model.dao.ApontMMFertDAO;
 import br.com.usinasantafe.pom.model.dao.AtividadeDAO;
 import br.com.usinasantafe.pom.model.dao.AtualAplicDAO;
 import br.com.usinasantafe.pom.model.dao.BoletimMMFertDAO;
@@ -454,11 +453,9 @@ public class ConfigCTR {
     public ArrayList<String> logBaseDadoList(){
         ArrayList<String> dadosArrayList = new ArrayList<>();
         BoletimMMFertDAO boletimMMFertDAO = new BoletimMMFertDAO();
-        ApontMMFertDAO apontMMFertDAO = new ApontMMFertDAO();
         CabecCheckListDAO cabecCheckListDAO = new CabecCheckListDAO();
         RespItemCheckListDAO respItemCheckListDAO = new RespItemCheckListDAO();
         dadosArrayList = boletimMMFertDAO.boletimAllArrayList(dadosArrayList);
-        dadosArrayList = apontMMFertDAO.apontAllArrayList(dadosArrayList);
         dadosArrayList = cabecCheckListDAO.cabecCheckListAllArrayList(dadosArrayList);
         dadosArrayList = respItemCheckListDAO.respCheckListAllArrayList(dadosArrayList);
         return dadosArrayList;

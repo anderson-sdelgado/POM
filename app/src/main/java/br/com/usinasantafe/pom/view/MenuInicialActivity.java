@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.usinasantafe.pom.BuildConfig;
 import br.com.usinasantafe.pom.POMContext;
 import br.com.usinasantafe.pom.R;
 import br.com.usinasantafe.pom.model.bean.variaveis.LogProcessoBean;
@@ -47,7 +48,7 @@ public class MenuInicialActivity extends ActivityGeneric {
         textViewProcesso = findViewById(R.id.textViewProcesso);
         textViewPrincipal = findViewById(R.id.textViewPrincipal);
 
-//        textViewPrincipal.setText("PRINCIPAL - V " + BuildConfig.VERSION_NAME);
+        textViewPrincipal.setText("PRINCIPAL - V " + BuildConfig.VERSION_NAME);
 
         LogProcessoDAO.getInstance().insertLogProcesso("customHandler.postDelayed(updateTimerThread, 0);", getLocalClassName());
         customHandler.postDelayed(updateTimerThread, 0);

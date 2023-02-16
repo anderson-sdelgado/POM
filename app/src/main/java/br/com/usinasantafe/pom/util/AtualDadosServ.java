@@ -79,6 +79,7 @@ public class AtualDadosServ {
 
 			}
 			catch (Exception e) {
+				Log.i("POM", "AtualDadosServ - FALHA catch (Exception e) {  = " + e);
 				LogErroDAO.getInstance().insertLogErro(e);
 			}
 
@@ -102,35 +103,12 @@ public class AtualDadosServ {
 
 	}
 
-	public void atualGenericoBD(ArrayList classeArrayList, int tipoReceb, String activity){
-
-		this.tipoReceb = tipoReceb;
-
-		selecionarClasses(classeArrayList);
-		startAtualizacao(activity);
-
-	}
-
 	public void atualGenericoBD(Context telaAtual, Class telaProx, ProgressDialog progressDialog, ArrayList classeArrayList, int tipoReceb, String activity){
 
 		this.tipoReceb = tipoReceb;
 		this.telaAtual = telaAtual;
 		this.telaProx = telaProx;
 		this.progressDialog = progressDialog;
-
-		selecionarClasses(classeArrayList);
-		startAtualizacao(activity);
-
-	}
-
-	public void atualGenericoBD(Context telaAtual, Class telaProx, ProgressDialog progressDialog, ArrayList classeArrayList, int tipoReceb, String activity, Class telaProxAlt, String dado){
-
-		this.tipoReceb = tipoReceb;
-		this.telaAtual = telaAtual;
-		this.telaProx = telaProx;
-		this.progressDialog = progressDialog;
-		this.telaProxAlt = telaProxAlt;
-		this.dado = dado;
 
 		selecionarClasses(classeArrayList);
 		startAtualizacao(activity);
@@ -153,6 +131,7 @@ public class AtualDadosServ {
 			}
 
 		} catch (Exception e) {
+			Log.i("POM", "AtualDadosServ - FALHA } catch (Exception e) {  = " + e);
 			LogErroDAO.getInstance().insertLogErro(e);
 		}
 
@@ -177,6 +156,7 @@ public class AtualDadosServ {
 			}
 
 		} catch (Exception e) {
+			Log.i("POM", "AtualDadosServ - FALHA - selecionarClasses -  } catch (Exception e) {  = " + e);
 			LogErroDAO.getInstance().insertLogErro(e);
 		}
 

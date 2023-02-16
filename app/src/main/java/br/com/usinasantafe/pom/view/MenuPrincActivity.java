@@ -106,24 +106,15 @@ public class MenuPrincActivity extends ActivityGeneric {
                 if (text.equals("FINALIZAR BOLETIM")) {
                     LogProcessoDAO.getInstance().insertLogProcesso("} else if (text.equals(\"FINALIZAR BOLETIM\")) {", getLocalClassName());
                     if(!pomContext.getMecanicoCTR().verApontMecanAberto()) {
-                        LogProcessoDAO.getInstance().insertLogProcesso("if(!pomContext.getMecanicoCTR().verApontAberto()) {", getLocalClassName());
-                        if (pomContext.getMotoMecFertCTR().hasApontBolAberto()) {
-                            LogProcessoDAO.getInstance().insertLogProcesso("if (pomContext.getMotoMecFertCTR().hasApontBolAberto()) {\n" +
-                                    "                            pomContext.getConfigCTR().setPosicaoTela(4L);\n" +
-                                    "                            customHandler.removeCallbacks(updateTimerThread);\n" +
-                                    "                            Intent it = new Intent(MenuPrincPMMActivity.this, HorimetroActivity.class);", getLocalClassName());
-                            pomContext.getConfigCTR().setPosicaoTela(4L);
-                            customHandler.removeCallbacks(updateTimerThread);
-                            Intent it = new Intent(MenuPrincActivity.this, HorimetroActivity.class);
-                            startActivity(it);
-                            finish();
-                        } else {
-                            LogProcessoDAO.getInstance().insertLogProcesso("} else {\n" +
-                                    "                            Toast.makeText(MenuPrincPMMActivity.this, \"POR FAVOR! INSIRA OS APONTAMENTOS AO BOLETIM!\",\n" +
-                                    "                                    Toast.LENGTH_LONG).show();", getLocalClassName());
-                            Toast.makeText(MenuPrincActivity.this, "POR FAVOR! INSIRA OS APONTAMENTOS AO BOLETIM!",
-                                    Toast.LENGTH_LONG).show();
-                        }
+                        LogProcessoDAO.getInstance().insertLogProcesso("if(!pomContext.getMecanicoCTR().verApontAberto()) {\n" +
+                                "                            pomContext.getConfigCTR().setPosicaoTela(4L);\n" +
+                                "                            customHandler.removeCallbacks(updateTimerThread);\n" +
+                                "                            Intent it = new Intent(MenuPrincPMMActivity.this, HorimetroActivity.class);", getLocalClassName());
+                        pomContext.getConfigCTR().setPosicaoTela(4L);
+                        customHandler.removeCallbacks(updateTimerThread);
+                        Intent it = new Intent(MenuPrincActivity.this, HorimetroActivity.class);
+                        startActivity(it);
+                        finish();
                     } else {
                         LogProcessoDAO.getInstance().insertLogProcesso("} else {\n" +
                                 "                        Toast.makeText(MenuPrincPMMActivity.this, \"POR FAVOR, FINALIZE O APONTAMENTO DE MANUTENÇÃO PARA INICIAR OUTRO APONTAMENTO.\",\n" +
@@ -185,29 +176,19 @@ public class MenuPrincActivity extends ActivityGeneric {
                 }
                 else if (text.equals("APONTAR MANUTENÇÃO")) {
                     LogProcessoDAO.getInstance().insertLogProcesso("else if (text.equals(\"APONTAR MANUTENÇÃO\")) {", getLocalClassName());
-                    if(pomContext.getMotoMecFertCTR().verUltApontAtiv()){
-                        LogProcessoDAO.getInstance().insertLogProcesso("if(pomContext.getMotoMecFertCTR().verUltApontAtiv()){", getLocalClassName());
-                        if(!pomContext.getMecanicoCTR().verApontMecanAberto()) {
-                            LogProcessoDAO.getInstance().insertLogProcesso("if(!pomContext.getMecanicoCTR().verApontAberto()) {\n" +
-                                    "                        pomContext.getConfigCTR().setPosicaoTela(27L);\n" +
-                                    "                        Intent it = new Intent(MenuPrincPMMActivity.this, OSMecanActivity.class);", getLocalClassName());
-                            pomContext.getConfigCTR().setPosicaoTela(27L);
-                            Intent it = new Intent(MenuPrincActivity.this, OSMecanActivity.class);
-                            startActivity(it);
-                            finish();
-                        } else {
-                            LogProcessoDAO.getInstance().insertLogProcesso("} else {\n" +
-                                    "                        Toast.makeText(MenuPrincPMMActivity.this, \"POR FAVOR,  FINALIZE O APONTAMENTO DE MANUTENÇÃO PARA INICIAR OUTRO APONTAMENTO.\",\n" +
-                                    "                                Toast.LENGTH_LONG).show();", getLocalClassName());
-                            Toast.makeText(MenuPrincActivity.this, "POR FAVOR, FINALIZE O APONTAMENTO DE MANUTENÇÃO PARA INICIAR OUTRO APONTAMENTO.",
-                                    Toast.LENGTH_LONG).show();
-                        }
-                    }
-                    else{
-                        LogProcessoDAO.getInstance().insertLogProcesso("else{\n" +
-                                "                        Toast.makeText(MenuPrincPMMActivity.this, \"POR FAVOR, REALIZE UMA PARADA PARA REALIZAR UM APONTAMENTO DE MANUTENÇÃO.\",\n" +
+                    if(!pomContext.getMecanicoCTR().verApontMecanAberto()) {
+                        LogProcessoDAO.getInstance().insertLogProcesso("if(!pomContext.getMecanicoCTR().verApontAberto()) {\n" +
+                                "                        pomContext.getConfigCTR().setPosicaoTela(27L);\n" +
+                                "                        Intent it = new Intent(MenuPrincPMMActivity.this, OSMecanActivity.class);", getLocalClassName());
+                        pomContext.getConfigCTR().setPosicaoTela(27L);
+                        Intent it = new Intent(MenuPrincActivity.this, OSMecanActivity.class);
+                        startActivity(it);
+                        finish();
+                    } else {
+                        LogProcessoDAO.getInstance().insertLogProcesso("} else {\n" +
+                                "                        Toast.makeText(MenuPrincPMMActivity.this, \"POR FAVOR,  FINALIZE O APONTAMENTO DE MANUTENÇÃO PARA INICIAR OUTRO APONTAMENTO.\",\n" +
                                 "                                Toast.LENGTH_LONG).show();", getLocalClassName());
-                        Toast.makeText(MenuPrincActivity.this, "POR FAVOR, REALIZE UMA PARADA PARA REALIZAR UM APONTAMENTO DE MANUTENÇÃO.",
+                        Toast.makeText(MenuPrincActivity.this, "POR FAVOR, FINALIZE O APONTAMENTO DE MANUTENÇÃO PARA INICIAR OUTRO APONTAMENTO.",
                                 Toast.LENGTH_LONG).show();
                     }
                 }

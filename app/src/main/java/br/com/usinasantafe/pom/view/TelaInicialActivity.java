@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
+import br.com.usinasantafe.pom.BuildConfig;
 import br.com.usinasantafe.pom.POMContext;
 import br.com.usinasantafe.pom.R;
 import br.com.usinasantafe.pom.model.bean.variaveis.LogErroBean;
@@ -96,7 +97,7 @@ public class TelaInicialActivity extends ActivityGeneric {
                         "                customHandler.postDelayed(updateTimerThread, 10000);", getLocalClassName());
                 customHandler.postDelayed(encerraAtualThread, 10000);
                 LogProcessoDAO.getInstance().insertLogProcesso("pomContext.getConfigCTR().verAtualAplic(pomContext.versaoAplic, this, getLocalClassName());", getLocalClassName());
-//                pomContext.getConfigCTR().verAtualAplic(BuildConfig.VERSION_NAME, this, getLocalClassName());
+                pomContext.getConfigCTR().verAtualAplic(BuildConfig.VERSION_NAME, this, getLocalClassName());
             }
             else{
                 LogProcessoDAO.getInstance().insertLogProcesso("else{\n" +

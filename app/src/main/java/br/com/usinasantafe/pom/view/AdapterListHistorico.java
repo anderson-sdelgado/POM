@@ -13,8 +13,6 @@ import java.util.List;
 import br.com.usinasantafe.pom.R;
 import br.com.usinasantafe.pom.control.MotoMecFertCTR;
 import br.com.usinasantafe.pom.model.bean.estaticas.AtividadeBean;
-import br.com.usinasantafe.pom.model.bean.estaticas.ParadaBean;
-import br.com.usinasantafe.pom.model.bean.variaveis.ApontMMFertBean;
 
 /**
  * Created by anderson on 08/03/2018.
@@ -56,30 +54,30 @@ public class AdapterListHistorico extends BaseAdapter {
         textViewHistHorario = view.findViewById(R.id.textViewHistHorario);
         textViewHistDetalhes = view.findViewById(R.id.textViewHistDetalhes);
 
-        ApontMMFertBean apontMMFertBean = (ApontMMFertBean) itens.get(position);
-        descrApont(apontMMFertBean.getParadaApontMMFert(), apontMMFertBean.getAtivApontMMFert());
-        horarioApont(apontMMFertBean.getDthrApontMMFert());
-        if(apontMMFertBean.getTransbApontMMFert() > 0){
-            textViewHistDetalhes.setText("TRANSBORDO: " + apontMMFertBean.getTransbApontMMFert());
-        }
-        else{
-            textViewHistDetalhes.setText("");
-        }
+//        ApontMMFertBean apontMMFertBean = (ApontMMFertBean) itens.get(position);
+//        descrApont(apontMMFertBean.getParadaApontMMFert(), apontMMFertBean.getAtivApontMMFert());
+//        horarioApont(apontMMFertBean.getDthrApontMMFert());
+//        if(apontMMFertBean.getTransbApontMMFert() > 0){
+//            textViewHistDetalhes.setText("TRANSBORDO: " + apontMMFertBean.getTransbApontMMFert());
+//        }
+//        else{
+//            textViewHistDetalhes.setText("");
+//        }
 
         return view;
     }
-
-    public void descrApont(Long idParada, Long idAtiv){
-        MotoMecFertCTR motoMecFertCTR = new MotoMecFertCTR();
-        if(idParada == 0) {
-            AtividadeBean atividadeBean = motoMecFertCTR.getAtividade(idAtiv);
-            textViewHistApont.setText("ATIVIDADE: " + atividadeBean.getCodAtiv() + " - " + atividadeBean.getDescrAtiv());
-            textViewHistApont.setTextColor(Color.BLUE);
-        }
-    }
-
-    public void horarioApont(String dataHora){
-        textViewHistHorario.setText("HORÁRIO: " + dataHora.substring(11));
-    }
+//
+//    public void descrApont(Long idParada, Long idAtiv){
+//        MotoMecFertCTR motoMecFertCTR = new MotoMecFertCTR();
+//        if(idParada == 0) {
+//            AtividadeBean atividadeBean = motoMecFertCTR.getAtividade(idAtiv);
+//            textViewHistApont.setText("ATIVIDADE: " + atividadeBean.getCodAtiv() + " - " + atividadeBean.getDescrAtiv());
+//            textViewHistApont.setTextColor(Color.BLUE);
+//        }
+//    }
+//
+//    public void horarioApont(String dataHora){
+//        textViewHistHorario.setText("HORÁRIO: " + dataHora.substring(11));
+//    }
 
 }

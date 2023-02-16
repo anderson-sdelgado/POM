@@ -82,16 +82,19 @@ public class EnvioDadosServ {
         return checkListCTR.verEnvioDados();
     }
 
-    public Boolean verifBolFechadoMMFert() {
+    public boolean verifBolAbertoEnviarMMFert() {
         MotoMecFertCTR motoMecFertCTR = new MotoMecFertCTR();
-        return motoMecFertCTR.verEnvioBolFech();
+        return motoMecFertCTR.verEnvioBolAbertoEnviar();
     }
 
-    public Boolean verifApontMMMovLeiraMecanFert() {
+    public boolean verifBolFechadoMMFert() {
         MotoMecFertCTR motoMecFertCTR = new MotoMecFertCTR();
+        return motoMecFertCTR.verEnvioBolFechado();
+    }
+
+    public boolean verifApontMMMovLeiraMecanFert() {
         MecanicoCTR mecanicoCTR = new MecanicoCTR();
-        return motoMecFertCTR.verEnvioApont()
-                || mecanicoCTR.verApontMecanNEnviado();
+        return mecanicoCTR.verApontMecanNEnviado();
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -118,7 +121,7 @@ public class EnvioDadosServ {
                     enviarBolFechadoMMFert(activity);
                 } else {
                     LogProcessoDAO.getInstance().insertLogProcesso("} else {", activity);
-                    if (verifApontMMMovLeiraMecanFert()) {
+                    if (verifBolAbertoEnviarMMFert() || verifApontMMMovLeiraMecanFert()) {
                         LogProcessoDAO.getInstance().insertLogProcesso("verifApontMMMovLeiraFert()\n" +
                                 "enviarBolAbertoMMFert()", activity);
                         enviarBolAbertoMMFert(activity);
@@ -133,7 +136,8 @@ public class EnvioDadosServ {
     }
 
     public boolean verifDadosEnvio() {
-        if ((!verifBolFechadoMMFert())
+        if ((!verifBolAbertoEnviarMMFert())
+                && (!verifBolFechadoMMFert())
                 && (!verifApontMMMovLeiraMecanFert())
                 && (!verifChecklist())){
             return false;

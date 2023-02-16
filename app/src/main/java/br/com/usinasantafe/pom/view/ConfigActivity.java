@@ -15,13 +15,11 @@ import br.com.usinasantafe.pom.model.bean.estaticas.AtividadeBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.EquipBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.FuncBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.ItemCheckListBean;
-import br.com.usinasantafe.pom.model.bean.estaticas.MotoMecBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.OSBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.ParadaBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.REquipAtivBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.ROSAtivBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.TurnoBean;
-import br.com.usinasantafe.pom.model.bean.variaveis.ApontMMFertBean;
 import br.com.usinasantafe.pom.model.bean.variaveis.BoletimMMFertBean;
 import br.com.usinasantafe.pom.model.bean.variaveis.CabecCheckListBean;
 import br.com.usinasantafe.pom.model.bean.variaveis.ConfigBean;
@@ -173,9 +171,6 @@ public class ConfigActivity extends ActivityGeneric {
                 ItemCheckListBean itemCheckListBean = new ItemCheckListBean();
                 itemCheckListBean.deleteAll();
 
-                MotoMecBean motoMecBean = new MotoMecBean();
-                motoMecBean.deleteAll();
-
                 OSBean osBean = new OSBean();
                 osBean.deleteAll();
 
@@ -190,9 +185,6 @@ public class ConfigActivity extends ActivityGeneric {
 
                 TurnoBean turnoBean = new TurnoBean();
                 turnoBean.deleteAll();
-
-                ApontMMFertBean apontMMFertBean = new ApontMMFertBean();
-                apontMMFertBean.deleteAll();
 
                 BoletimMMFertBean boletimMMFertBean = new BoletimMMFertBean();
                 boletimMMFertBean.deleteAll();

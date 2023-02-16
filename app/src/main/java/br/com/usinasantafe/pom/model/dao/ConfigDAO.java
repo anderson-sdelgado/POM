@@ -50,15 +50,9 @@ public class ConfigDAO {
         configBean.setNroOSConfig(0L);
         configBean.setIdAtivConfig(0L);
         configBean.setUltParadaBolConfig(0L);
-        configBean.setPressaoConfig(0D);
-        configBean.setVelocConfig(0L);
-        configBean.setBocalConfig(0L);
         configBean.setSenhaConfig(senha);
         configBean.setPosicaoTela(0L);
         configBean.setStatusRetVerif(0L);
-        configBean.setIdFrenteConfig(0L);
-        configBean.setIdPropriedadeConfig(0L);
-        configBean.setCarretaConfig(0L);
         configBean.insert();
         configBean.commit();
     }
@@ -91,24 +85,6 @@ public class ConfigDAO {
     public void setUltParadaBolConfig(Long idParada){
         ConfigBean configBean = getConfig();
         configBean.setUltParadaBolConfig(idParada);
-        configBean.update();
-    }
-
-    public void setPressaoConfig(Double pressao){
-        ConfigBean configBean = getConfig();
-        configBean.setPressaoConfig(pressao);
-        configBean.update();
-    }
-
-    public void setVelocConfig(Long veloc){
-        ConfigBean configBean = getConfig();
-        configBean.setVelocConfig(veloc);
-        configBean.update();
-    }
-
-    public void setBocalConfig(Long bocal){
-        ConfigBean configBean = getConfig();
-        configBean.setBocalConfig(bocal);
         configBean.update();
     }
 

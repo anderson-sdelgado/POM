@@ -29,8 +29,6 @@ public class ConfigBean extends Entidade {
 	@DatabaseField
 	private Long idTurnoConfig;
 	@DatabaseField
-	private Long idEquipBombaBolConfig;
-	@DatabaseField
 	private Double hodometroInicialConfig;
 	@DatabaseField
 	private Double hodometroFinalConfig;
@@ -45,22 +43,6 @@ public class ConfigBean extends Entidade {
 	@DatabaseField
 	private Long ultParadaBolConfig;
 	@DatabaseField
-	private Double pressaoConfig;
-	@DatabaseField
-	private Long velocConfig;
-	@DatabaseField
-	private Long bocalConfig;
-	@DatabaseField
-	private Long idFrenteConfig;
-	@DatabaseField
-	private Long idPropriedadeConfig;
-	@DatabaseField
-	private Long codPropriedadeConfig;
-	@DatabaseField
-	private String descrPropriedadeConfig;
-	@DatabaseField
-	private Long carretaConfig;
-	@DatabaseField
 	private Double horimetroConfig;
 	@DatabaseField
 	private Long verRecInformativo; // 0 - Verificar Dados; 1- Dados Recebidos; 2 - Dados Visualizados
@@ -70,8 +52,6 @@ public class ConfigBean extends Entidade {
 	private Long atualCheckList;
 	@DatabaseField
 	private Long statusRetVerif; // 0 - Não Verificando; 1 - Verificando
-	@DatabaseField
-	private Long funcaoComposto; // 2 - Insumo; 3 - Composto
 	@DatabaseField
 	private Long posicaoTela;
 	// 1 - Inicio do Boletim; PMM - ECM - PCOMP
@@ -186,30 +166,6 @@ public class ConfigBean extends Entidade {
 		this.ultParadaBolConfig = ultParadaBolConfig;
 	}
 
-	public Double getPressaoConfig() {
-		return pressaoConfig;
-	}
-
-	public void setPressaoConfig(Double pressaoConfig) {
-		this.pressaoConfig = pressaoConfig;
-	}
-
-	public Long getVelocConfig() {
-		return velocConfig;
-	}
-
-	public void setVelocConfig(Long velocConfig) {
-		this.velocConfig = velocConfig;
-	}
-
-	public Long getBocalConfig() {
-		return bocalConfig;
-	}
-
-	public void setBocalConfig(Long bocalConfig) {
-		this.bocalConfig = bocalConfig;
-	}
-
 	public Double getHorimetroConfig() {
 		return horimetroConfig;
 	}
@@ -258,54 +214,6 @@ public class ConfigBean extends Entidade {
 		this.statusRetVerif = statusRetVerif;
 	}
 
-	public Long getIdFrenteConfig() {
-		return idFrenteConfig;
-	}
-
-	public void setIdFrenteConfig(Long idFrenteConfig) {
-		this.idFrenteConfig = idFrenteConfig;
-	}
-
-	public Long getIdPropriedadeConfig() {
-		return idPropriedadeConfig;
-	}
-
-	public void setIdPropriedadeConfig(Long idPropriedadeConfig) {
-		this.idPropriedadeConfig = idPropriedadeConfig;
-	}
-
-	public Long getFuncaoComposto() {
-		return funcaoComposto;
-	}
-
-	public void setFuncaoComposto(Long funcaoComposto) {
-		this.funcaoComposto = funcaoComposto;
-	}
-
-	public Long getCodPropriedadeConfig() {
-		return codPropriedadeConfig;
-	}
-
-	public void setCodPropriedadeConfig(Long codPropriedadeConfig) {
-		this.codPropriedadeConfig = codPropriedadeConfig;
-	}
-
-	public String getDescrPropriedadeConfig() {
-		return descrPropriedadeConfig;
-	}
-
-	public void setDescrPropriedadeConfig(String descrPropriedadeConfig) {
-		this.descrPropriedadeConfig = descrPropriedadeConfig;
-	}
-
-	public Long getCarretaConfig() {
-		return carretaConfig;
-	}
-
-	public void setCarretaConfig(Long carretaConfig) {
-		this.carretaConfig = carretaConfig;
-	}
-
 	public Long getMatricFuncConfig() {
 		return matricFuncConfig;
 	}
@@ -320,14 +228,6 @@ public class ConfigBean extends Entidade {
 
 	public void setIdTurnoConfig(Long idTurnoConfig) {
 		this.idTurnoConfig = idTurnoConfig;
-	}
-
-	public Long getIdEquipBombaBolConfig() {
-		return idEquipBombaBolConfig;
-	}
-
-	public void setIdEquipBombaBolConfig(Long idEquipBombaBolConfig) {
-		this.idEquipBombaBolConfig = idEquipBombaBolConfig;
 	}
 
 	public Double getHodometroInicialConfig() {
@@ -356,11 +256,4 @@ public class ConfigBean extends Entidade {
 		return latitudeConfig;
 	}
 
-//	public Long getQtdeCarretaConfig() {
-//		return qtdeCarretaConfig;
-//	}
-//
-//	public void setQtdeCarretaConfig(Long qtdeCarretaConfig) {
-//		this.qtdeCarretaConfig = qtdeCarretaConfig;
-//	}
 }

@@ -1,6 +1,7 @@
 package br.com.usinasantafe.pom.util.conHttp;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -86,21 +87,23 @@ public class GetBDGenerico extends AsyncTask<String, Void, String> {
 			connection.disconnect();
             
 		} catch (Exception e) {
+			Log.i("POM", "FALHA } catch (Exception e) { = " + e);
 			LogErroDAO.getInstance().insertLogErro(e);
 			if(bufferedReader != null){
 				try {
 					bufferedReader.close();
 				} catch (Exception erro) {
+					Log.i("POM", "FALHA } catch (Exception erro) { = " + erro);
 					LogErroDAO.getInstance().insertLogErro(erro);
 				}
 			}
-		}
-		finally{
+		} finally {
 			
 			if(bufferedReader != null){
 				try {
 					bufferedReader.close();
 				} catch (Exception e) {
+					Log.i("POM", "FALHA } finally { = " + e);
 					LogErroDAO.getInstance().insertLogErro(e);
 				}
 			}
@@ -116,6 +119,7 @@ public class GetBDGenerico extends AsyncTask<String, Void, String> {
 			LogProcessoDAO.getInstance().insertLogProcesso("AtualDadosServ.getInstance().manipularDadosHttp('" + tipo + "', result);", activity);
 			AtualDadosServ.getInstance().manipularDadosHttp(tipo, result, activity);
 		} catch (Exception e) {
+			Log.i("POM", "FALHA onPostExecute = " + e);
 			LogErroDAO.getInstance().insertLogErro(e);
 		}
 

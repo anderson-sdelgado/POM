@@ -14,19 +14,16 @@ import br.com.usinasantafe.pom.model.bean.estaticas.EquipBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.FuncBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.ItemCheckListBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.ItemOSMecanBean;
-import br.com.usinasantafe.pom.model.bean.estaticas.MotoMecBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.OSBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.ParadaBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.REquipAtivBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.ROSAtivBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.ServicoBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.TurnoBean;
-import br.com.usinasantafe.pom.model.bean.variaveis.ApontMMFertBean;
 import br.com.usinasantafe.pom.model.bean.variaveis.ApontMecanBean;
 import br.com.usinasantafe.pom.model.bean.variaveis.BoletimMMFertBean;
 import br.com.usinasantafe.pom.model.bean.variaveis.CabecCheckListBean;
 import br.com.usinasantafe.pom.model.bean.variaveis.ConfigBean;
-import br.com.usinasantafe.pom.model.bean.variaveis.ItemCalibPneuBean;
 import br.com.usinasantafe.pom.model.bean.variaveis.LogErroBean;
 import br.com.usinasantafe.pom.model.bean.variaveis.LogProcessoBean;
 import br.com.usinasantafe.pom.model.bean.variaveis.RespItemCheckListBean;
@@ -34,8 +31,8 @@ import br.com.usinasantafe.pom.model.dao.LogErroDAO;
 
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
-	public static final String FORCA_DB_NAME = "mm_db";
-	public static final int FORCA_BD_VERSION = 5;
+	public static final String FORCA_DB_NAME = "pom_db";
+	public static final int FORCA_BD_VERSION = 1;
 
 	private static DatabaseHelper instance;
 	
@@ -92,7 +89,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			TableUtils.dropTable(cs, FuncBean.class, true);
 			TableUtils.dropTable(cs, ItemCheckListBean.class, true);
 			TableUtils.dropTable(cs, ItemOSMecanBean.class, true);
-			TableUtils.dropTable(cs, MotoMecBean.class, true);
 			TableUtils.dropTable(cs, OSBean.class, true);
 			TableUtils.dropTable(cs, ParadaBean.class, true);
 			TableUtils.dropTable(cs, REquipAtivBean.class, true);
@@ -101,11 +97,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			TableUtils.dropTable(cs, TurnoBean.class, true);
 
 			TableUtils.dropTable(cs, ApontMecanBean.class, true);
-			TableUtils.dropTable(cs, ApontMMFertBean.class, true);
 			TableUtils.dropTable(cs, BoletimMMFertBean.class, true);
 			TableUtils.dropTable(cs, CabecCheckListBean.class, true);
 			TableUtils.dropTable(cs, ConfigBean.class, true);
-			TableUtils.dropTable(cs, ItemCalibPneuBean.class, true);
 			TableUtils.dropTable(cs, LogErroBean.class, true);
 			TableUtils.dropTable(cs, LogProcessoBean.class, true);
 			TableUtils.dropTable(cs, RespItemCheckListBean.class, true);
@@ -127,7 +121,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			TableUtils.createTable(cs, FuncBean.class);
 			TableUtils.createTable(cs, ItemCheckListBean.class);
 			TableUtils.createTable(cs, ItemOSMecanBean.class);
-			TableUtils.createTable(cs, MotoMecBean.class);
 			TableUtils.createTable(cs, OSBean.class);
 			TableUtils.createTable(cs, ParadaBean.class);
 			TableUtils.createTable(cs, REquipAtivBean.class);
@@ -136,11 +129,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			TableUtils.createTable(cs, TurnoBean.class);
 
 			TableUtils.createTable(cs, ApontMecanBean.class);
-			TableUtils.createTable(cs, ApontMMFertBean.class);
 			TableUtils.createTable(cs, BoletimMMFertBean.class);
 			TableUtils.createTable(cs, CabecCheckListBean.class);
 			TableUtils.createTable(cs, ConfigBean.class);
-			TableUtils.createTable(cs, ItemCalibPneuBean.class);
 			TableUtils.createTable(cs, LogErroBean.class);
 			TableUtils.createTable(cs, LogProcessoBean.class);
 			TableUtils.createTable(cs, RespItemCheckListBean.class);
