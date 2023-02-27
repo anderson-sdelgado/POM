@@ -51,9 +51,7 @@ public class VerifDadosServ {
         ConfigCTR configCTR = new ConfigCTR();
         CheckListCTR checkListCTR = new CheckListCTR();
         MecanicoCTR mecanicoCTR = new MecanicoCTR();
-        MotoMecFertCTR motoMecFertCTR = new MotoMecFertCTR();
         LogProcessoDAO.getInstance().insertLogProcesso("public void manipularDadosHttp(String result) {", activity);
-        //Log.i("PMM", "manipularDadosHttp(String " + result + ", String activity) - Classe = " + this.classe);
         if (this.classe.equals("Equip")) {
             LogProcessoDAO.getInstance().insertLogProcesso("if (this.tipo.equals(\"Equip\")) {\n" +
                     "            configCTR.receberVerifEquip(" + result + ");", activity);

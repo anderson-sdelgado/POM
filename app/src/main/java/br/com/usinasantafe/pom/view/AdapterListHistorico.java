@@ -11,8 +11,11 @@ import android.widget.TextView;
 import java.util.List;
 
 import br.com.usinasantafe.pom.R;
+import br.com.usinasantafe.pom.control.MecanicoCTR;
 import br.com.usinasantafe.pom.control.MotoMecFertCTR;
 import br.com.usinasantafe.pom.model.bean.estaticas.AtividadeBean;
+import br.com.usinasantafe.pom.model.bean.estaticas.ItemOSMecanBean;
+import br.com.usinasantafe.pom.model.bean.variaveis.ApontMecanBean;
 
 /**
  * Created by anderson on 08/03/2018.
@@ -22,9 +25,11 @@ public class AdapterListHistorico extends BaseAdapter {
 
     private List itens;
     private LayoutInflater layoutInflater;
-    private TextView textViewHistApont;
-    private TextView textViewHistHorario;
-    private TextView textViewHistDetalhes;
+    private TextView textViewHistOS;
+    private TextView textViewHistItem;
+    private TextView textViewHistStatus;
+    private TextView textViewHistHorarioInicial;
+    private TextView textViewHistHorarioFinal;
 
     public AdapterListHistorico(Context context, List itens) {
         this.itens = itens;
@@ -50,34 +55,48 @@ public class AdapterListHistorico extends BaseAdapter {
     public View getView(int position, View view, ViewGroup parent) {
 
         view = layoutInflater.inflate(R.layout.activity_item_historico, null);
-        textViewHistApont = view.findViewById(R.id.textViewHistApont);
-        textViewHistHorario = view.findViewById(R.id.textViewHistHorario);
-        textViewHistDetalhes = view.findViewById(R.id.textViewHistDetalhes);
+        textViewHistOS = view.findViewById(R.id.textViewHistOS);
+        textViewHistItem = view.findViewById(R.id.textViewHistItem);
+        textViewHistStatus = view.findViewById(R.id.textViewHistStatus);
+        textViewHistHorarioInicial = view.findViewById(R.id.textViewHistHorarioInicial);
+        textViewHistHorarioFinal = view.findViewById(R.id.textViewHistHorarioFinal);
 
-//        ApontMMFertBean apontMMFertBean = (ApontMMFertBean) itens.get(position);
-//        descrApont(apontMMFertBean.getParadaApontMMFert(), apontMMFertBean.getAtivApontMMFert());
-//        horarioApont(apontMMFertBean.getDthrApontMMFert());
-//        if(apontMMFertBean.getTransbApontMMFert() > 0){
-//            textViewHistDetalhes.setText("TRANSBORDO: " + apontMMFertBean.getTransbApontMMFert());
-//        }
-//        else{
-//            textViewHistDetalhes.setText("");
-//        }
+        ApontMecanBean apontMecanBean  = (ApontMecanBean) itens.get(position);
+        textViewHistOS.setText("NRO OS: " + apontMecanBean.getOsApontMecan());
+        descrItem(apontMecanBean.getOsApontMecan(), apontMecanBean.getItemOSApontMecan());
+        horarioInicial(apontMecanBean.getDthrInicialApontMecan());
+        if(apontMecanBean.getStatusApontMecan() < 3){
+            textViewHistStatus.setText("ABERTO");
+            textViewHistStatus.setTextColor(Color.RED);
+        }
+        else{
+            textViewHistStatus.setText("FECHADO");
+            textViewHistStatus.setTextColor(Color.BLUE);
+            horarioFinal(apontMecanBean.getDthrFinalApontMecan());
+        }
 
         return view;
     }
-//
-//    public void descrApont(Long idParada, Long idAtiv){
-//        MotoMecFertCTR motoMecFertCTR = new MotoMecFertCTR();
-//        if(idParada == 0) {
-//            AtividadeBean atividadeBean = motoMecFertCTR.getAtividade(idAtiv);
-//            textViewHistApont.setText("ATIVIDADE: " + atividadeBean.getCodAtiv() + " - " + atividadeBean.getDescrAtiv());
-//            textViewHistApont.setTextColor(Color.BLUE);
-//        }
-//    }
-//
-//    public void horarioApont(String dataHora){
-//        textViewHistHorario.setText("HORÁRIO: " + dataHora.substring(11));
-//    }
+
+    public void descrItem(Long nroOS, Long seqItemOS){
+        MecanicoCTR mecanicoCTR = new MecanicoCTR();
+        if(mecanicoCTR.verItemOSMecan(nroOS, seqItemOS)) {
+            ItemOSMecanBean itemOSMecanBean = mecanicoCTR.getItemOSMecan(nroOS, seqItemOS);
+            textViewHistItem.setText("ITEM: " + itemOSMecanBean.getSeqItemOS() + " - "
+                    + mecanicoCTR.getServico(itemOSMecanBean.getIdServItemOS()).getDescrServico() + " - "
+                    + mecanicoCTR.getComponente(itemOSMecanBean.getIdCompItemOS()).getCodComponente() + " - "
+                    + mecanicoCTR.getComponente(itemOSMecanBean.getIdCompItemOS()).getDescrComponente());
+        } else {
+            textViewHistItem.setText("Item: " + seqItemOS);
+        }
+    }
+
+    public void horarioInicial(String dataHora){
+        textViewHistHorarioInicial.setText("HORÁRIO INICIAL: " + dataHora.substring(11));
+    }
+
+    public void horarioFinal(String dataHora){
+        textViewHistHorarioFinal.setText("HORÁRIO FINAL: " + dataHora.substring(11));
+    }
 
 }

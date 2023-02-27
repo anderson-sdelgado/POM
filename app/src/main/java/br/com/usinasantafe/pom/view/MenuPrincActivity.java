@@ -117,9 +117,9 @@ public class MenuPrincActivity extends ActivityGeneric {
                         finish();
                     } else {
                         LogProcessoDAO.getInstance().insertLogProcesso("} else {\n" +
-                                "                        Toast.makeText(MenuPrincPMMActivity.this, \"POR FAVOR, FINALIZE O APONTAMENTO DE MANUTENÇÃO PARA INICIAR OUTRO APONTAMENTO.\",\n" +
+                                "                        Toast.makeText(MenuPrincPMMActivity.this, \"POR FAVOR, FINALIZE O APONTAMENTO DE MANUTENÇÃO PARA PODER FINALIZAR O BOLETIM.\",\n" +
                                 "                                Toast.LENGTH_LONG).show();", getLocalClassName());
-                        Toast.makeText(MenuPrincActivity.this, "POR FAVOR, FINALIZE O APONTAMENTO DE MANUTENÇÃO PARA INICIAR OUTRO APONTAMENTO.",
+                        Toast.makeText(MenuPrincActivity.this, "POR FAVOR, FINALIZE O APONTAMENTO DE MANUTENÇÃO PARA PODER FINALIZAR O BOLETIM.",
                                 Toast.LENGTH_LONG).show();
                     }
                 }

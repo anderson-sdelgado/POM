@@ -5,18 +5,29 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textViewHistApont"
+        android:id="@+id/textViewHistOS"
         style="@style/TextViewItemList"
         android:text="@string/texto_hist_apont"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textViewHistHorario"
+        android:id="@+id/textViewHistItem"
+        style="@style/TextViewItemList"
+        android:text="@string/texto_hist_apont"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewHistStatus"
         style="@style/TextViewItemList"
         android:text="@string/texto_hist_horario" />
 
     <TextView
-        android:id="@+id/textViewHistDetalhes"
+        android:id="@+id/textViewHistHorarioInicial"
+        style="@style/TextViewItemList"
+        android:text="@string/texto_hist_horario" />
+
+    <TextView
+        android:id="@+id/textViewHistHorarioFinal"
         style="@style/TextViewItemList"
         android:text="@string/texto_hist_impl_transb" />
 

@@ -127,7 +127,7 @@ public class MotoMecFertCTR {
             boletimMMFertDAO.updateBoletimMMFertAberto(retorno[1]);
 
             ApontMecanDAO apontMecanDAO = new ApontMecanDAO();
-            ArrayList<Long> idApontMecanArrayList = apontMecanDAO.idApontMecanArrayList(retorno[7]);
+            ArrayList<Long> idApontMecanArrayList = apontMecanDAO.idApontMecanArrayList(retorno[2]);
             apontMecanDAO.updateApontMecan(idApontMecanArrayList);
 
             EnvioDadosServ.getInstance().envioDados(activity);
@@ -151,7 +151,7 @@ public class MotoMecFertCTR {
             boletimMMFertDAO.updateBoletimMMFertEnvio(boletimArrayList);
 
             ApontMecanDAO apontMecanDAO = new ApontMecanDAO();
-            ArrayList<Long> idApontMecanArrayList = apontMecanDAO.idApontMecanArrayList(retorno[7]);
+            ArrayList<Long> idApontMecanArrayList = apontMecanDAO.idApontMecanArrayList(retorno[2]);
             apontMecanDAO.updateApontMecan(idApontMecanArrayList);
             EnvioDadosServ.getInstance().envioDados(activity);
 

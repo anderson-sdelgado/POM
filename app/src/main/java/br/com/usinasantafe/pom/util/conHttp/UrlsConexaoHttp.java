@@ -6,8 +6,8 @@ public class UrlsConexaoHttp {
 
     public static String versao = "versao_" + POMContext.versaoWS.replace(".", "_");
 
-    public static String url = "https://www.usinasantafe.com.br/pomdev/view/";
-//    public static String url = "https://www.usinasantafe.com.br/pomqa/view/";
+//    public static String url = "https://www.usinasantafe.com.br/pomdev/view/";
+    public static String url = "https://www.usinasantafe.com.br/pomqa/view/";
 //    public static String url = "https://www.usinasantafe.com.br/pomprod/" + versao + "/view/";
 
     public static String localPSTEstatica = "br.com.usinasantafe.pom.model.bean.estaticas.";

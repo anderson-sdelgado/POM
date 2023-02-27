@@ -63,17 +63,6 @@ public class OSDAO {
         return osBean;
     }
 
-    public Double rendOS(Long nroOS){
-        OSBean osBean = new OSBean();
-        List<OSBean> osList = osList(nroOS);
-        if (osList.size() > 0) {
-            osBean = osList.get(0);
-        } else {
-            osBean.setAreaProgrOS(150D);
-        }
-        return osBean.getAreaProgrOS();
-    }
-
     private List<OSBean> osList(Long nroOS){
         OSBean osBean = new OSBean();
         ArrayList pesqArrayList = new ArrayList();
@@ -86,7 +75,6 @@ public class OSDAO {
     }
 
     public void recDadosOS(JSONArray jsonArray) throws JSONException {
-
         osDelAll();
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject objeto = jsonArray.getJSONObject(i);
@@ -94,11 +82,9 @@ public class OSDAO {
             OSBean osBean = gson.fromJson(objeto.toString(), OSBean.class);
             osBean.insert();
         }
-
     }
 
     public void recDadosROSAtiv(JSONArray jsonArray) throws JSONException {
-
         rOSAtivDelAll();
         for (int j = 0; j < jsonArray.length(); j++) {
             JSONObject objeto = jsonArray.getJSONObject(j);
@@ -106,7 +92,6 @@ public class OSDAO {
             ROSAtivBean rosAtivBean = gson.fromJson(objeto.toString(), ROSAtivBean.class);
             rosAtivBean.insert();
         }
-
     }
 
     public boolean verOSMecan(Long nroOS, Long idEquip){

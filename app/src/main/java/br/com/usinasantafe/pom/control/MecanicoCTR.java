@@ -11,6 +11,7 @@ import java.util.List;
 import br.com.usinasantafe.pom.model.bean.estaticas.ComponenteBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.ItemOSMecanBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.ServicoBean;
+import br.com.usinasantafe.pom.model.bean.variaveis.ApontMecanBean;
 import br.com.usinasantafe.pom.model.dao.ApontMecanDAO;
 import br.com.usinasantafe.pom.model.dao.BoletimMMFertDAO;
 import br.com.usinasantafe.pom.model.dao.ComponenteDAO;
@@ -53,7 +54,24 @@ public class MecanicoCTR {
     public List<ItemOSMecanBean> itemOSMecanList(){
         ItemOSMecanDAO itemOSMecanDAO = new ItemOSMecanDAO();
         OSDAO osDAO = new OSDAO();
-        return itemOSMecanDAO.itemOSMecanList(osDAO.getOS(apontMecanDAO.getApontMecanBean().getOsApontMecan()).getIdOS());
+        return itemOSMecanDAO.itemOSMecanIdOSList(osDAO.getOS(apontMecanDAO.getApontMecanBean().getOsApontMecan()).getIdOS());
+    }
+
+    public boolean verItemOSMecan(Long nroOS, Long seqItemOS){
+        ConfigCTR configCTR = new ConfigCTR();
+        OSDAO osDAO = new OSDAO();
+        ItemOSMecanDAO itemOSMecanDAO = new ItemOSMecanDAO();
+        boolean ret = osDAO.verOSMecan(nroOS, configCTR.getEquip().getIdEquip());
+        if(!ret){
+            return false;
+        }
+        return itemOSMecanDAO.verItemOSMecan(osDAO.getOS(nroOS).getIdOS(), seqItemOS);
+    }
+
+    public ItemOSMecanBean getItemOSMecan(Long nroOS, Long seqItemOS){
+        OSDAO osDAO = new OSDAO();
+        ItemOSMecanDAO itemOSMecanDAO = new ItemOSMecanDAO();
+        return itemOSMecanDAO.getItemOSMecan(osDAO.getOS(nroOS).getIdOS(), seqItemOS);
     }
 
     public ServicoBean getServico(Long idServItemOS){
@@ -88,6 +106,12 @@ public class MecanicoCTR {
         ApontMecanDAO apontMecanDAO = new ApontMecanDAO();
         int qtde = apontMecanDAO.apontMecanNEnviadoList().size();
         return qtde > 0;
+    }
+
+    public List<ApontMecanBean> apontMecanList(){
+        BoletimMMFertDAO boletimMMFertDAO = new BoletimMMFertDAO();
+        ApontMecanDAO apontMecanDAO = new ApontMecanDAO();
+        return apontMecanDAO.apontMecanList(boletimMMFertDAO.getBoletimMMFertAberto().getIdBolMMFert());
     }
 
     public void finalizarApontMecan(String activity){

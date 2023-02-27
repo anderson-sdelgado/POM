@@ -23,15 +23,14 @@ public class ListaHistApontActivity extends ActivityGeneric {
 
         Button buttonRetHistorico = findViewById(R.id.buttonRetHistorico);
 
-//        LogProcessoDAO.getInstance().insertLogProcesso("ListView listaHistorico = findViewById(R.id.listaHistorico);\n" +
-//                "        AdapterListHistorico adapterListHistorico = new AdapterListHistorico(this, POMContext.getMotoMecFertCTR().apontList());\n" +
-//                "        listaHistorico.setAdapter(adapterListHistorico);", getLocalClassName());
-//        ListView listaHistorico = findViewById(R.id.listaHistorico);
-//        AdapterListHistorico adapterListHistorico = new AdapterListHistorico(this, pomContext.getMotoMecFertCTR().apontList());
-//        listaHistorico.setAdapter(adapterListHistorico);
+        LogProcessoDAO.getInstance().insertLogProcesso("ListView historicoListView = findViewById(R.id.listaHistorico);\n" +
+                "        AdapterListHistorico adapterListHistorico = new AdapterListHistorico(this, pomContext.getMecanicoCTR().apontMecanList());\n" +
+                "        historicoListView.setAdapter(adapterListHistorico);", getLocalClassName());
+        ListView historicoListView = findViewById(R.id.listaHistorico);
+        AdapterListHistorico adapterListHistorico = new AdapterListHistorico(this, pomContext.getMecanicoCTR().apontMecanList());
+        historicoListView.setAdapter(adapterListHistorico);
 
         buttonRetHistorico.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 LogProcessoDAO.getInstance().insertLogProcesso("buttonRetHistorico.setOnClickListener(new View.OnClickListener() {\n" +
