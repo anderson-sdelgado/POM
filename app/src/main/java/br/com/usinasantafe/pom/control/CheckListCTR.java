@@ -9,6 +9,7 @@ import java.util.List;
 import br.com.usinasantafe.pom.model.bean.estaticas.ItemCheckListBean;
 import br.com.usinasantafe.pom.model.bean.variaveis.CabecCheckListBean;
 import br.com.usinasantafe.pom.model.bean.variaveis.RespItemCheckListBean;
+import br.com.usinasantafe.pom.model.dao.AtualAplicDAO;
 import br.com.usinasantafe.pom.model.dao.CabecCheckListDAO;
 import br.com.usinasantafe.pom.model.dao.EquipDAO;
 import br.com.usinasantafe.pom.model.dao.ItemCheckListDAO;
@@ -68,9 +69,11 @@ public class CheckListCTR {
                 , configCTR.getConfig().getUltTurnoCLConfig(), configCTR.getConfig().getDtUltCLConfig());
     }
 
-    public void atualCheckList(String dado, Context telaAtual, Class telaProx, ProgressDialog progressDialog, String activity){
+    public void atualCheckList(Context telaAtual, Class telaProx, ProgressDialog progressDialog, String activity){
         ItemCheckListDAO itemCheckListDAO = new ItemCheckListDAO();
-        itemCheckListDAO.atualCheckList(dado, telaAtual, telaProx, progressDialog, activity);
+        AtualAplicDAO atualAplicDAO = new AtualAplicDAO();
+        ConfigCTR configCTR = new ConfigCTR();
+        itemCheckListDAO.atualCheckList(atualAplicDAO.getAtualNroEquip(configCTR.getEquip().getNroEquip()), telaAtual, telaProx, progressDialog, activity);
     }
 
     public void receberVerifCheckList(String result) {

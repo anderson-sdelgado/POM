@@ -74,11 +74,6 @@ public class Tempo {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public Long dthrAddMinutoLong(Long dthrLong, int minuto){
-        dthrLong = dthrLong + (minuto * 60 * 1000);
-        return dthrLong;
-    }
-
     public boolean verDthrServ(String dthrServ){
 
         Date dataHora = new Date();
@@ -98,32 +93,28 @@ public class Tempo {
         String diaStr;
         if(dia < 10){
             diaStr = "0" + dia;
-        }
-        else{
+        } else {
             diaStr = String.valueOf(dia);
         }
 
         String mesStr;
         if(mes < 10){
             mesStr = "0" + mes;
-        }
-        else{
+        } else {
             mesStr = String.valueOf(mes);
         }
 
         String horasStr;
         if(hora < 10){
             horasStr = "0" + hora;
-        }
-        else{
+        } else {
             horasStr = String.valueOf(hora);
         }
 
         String minutosStr;
         if(minuto < 10){
             minutosStr = "0" + minuto;
-        }
-        else{
+        } else {
             minutosStr = String.valueOf(minuto);
         }
 
@@ -164,7 +155,5 @@ public class Tempo {
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 }

@@ -3,7 +3,6 @@ package br.com.usinasantafe.pom.util;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 
@@ -14,12 +13,14 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-import br.com.usinasantafe.pom.control.ConfigCTR;
+import br.com.usinasantafe.pom.model.dao.AtualAplicDAO;
 import br.com.usinasantafe.pom.model.dao.LogErroDAO;
 import br.com.usinasantafe.pom.model.dao.LogProcessoDAO;
 import br.com.usinasantafe.pom.model.pst.GenericRecordable;
-import br.com.usinasantafe.pom.util.conHttp.GetBDGenerico;
+import br.com.usinasantafe.pom.util.conHttp.PostBDGenerico;
 import br.com.usinasantafe.pom.util.conHttp.UrlsConexaoHttp;
 
 public class AtualDadosServ {
@@ -34,8 +35,6 @@ public class AtualDadosServ {
 	private Context telaAtual;
 	private Class telaProx;
 	private int tipoReceb;
-	private Class telaProxAlt;
-	private String dado;
 	
 	public AtualDadosServ() {
 		genericRecordable = new GenericRecordable();
@@ -73,7 +72,7 @@ public class AtualDadosServ {
 
 				if(contAtualBD > 0){
 					LogProcessoDAO.getInstance().insertLogProcesso("if(contAtualBD > 0){\n" +
-							"\t\t\t\t\tatualizandoBD(activity);", activity);
+							"atualizandoBD(activity);", activity);
 					atualizandoBD(activity);
 				}
 
@@ -85,16 +84,27 @@ public class AtualDadosServ {
 
 		} else {
 			LogProcessoDAO.getInstance().insertLogProcesso("} else {\n" +
-					"\t\t\tencerrar(activity);", activity);
+					"encerrar(activity);", activity);
 			encerrar(activity);
 		}
 
 	}
-	
 
-	public void atualTodasTabBD(Context telaAtual, ProgressDialog progressDialog, String activity){
+	public void atualTodasTabBD(Context telaAtual, Class telaProx, ProgressDialog progressDialog, String activity, int tipoReceb){
 
-		this.tipoReceb = 1;
+		this.tipoReceb = tipoReceb;
+		this.telaAtual = telaAtual;
+		this.telaProx = telaProx;
+		this.progressDialog = progressDialog;
+
+		allClasses();
+		startAtualizacao(activity);
+
+	}
+
+	public void atualTodasTabBD(Context telaAtual, ProgressDialog progressDialog, String activity, int tipoReceb){
+
+		this.tipoReceb = tipoReceb;
 		this.telaAtual = telaAtual;
 		this.progressDialog = progressDialog;
 
@@ -168,9 +178,14 @@ public class AtualDadosServ {
 		String[] url = {classe, activity};
 		contAtualBD++;
 
-		LogProcessoDAO.getInstance().insertLogProcesso("getBDGenerico.execute('" + classe + "');", activity);
-		GetBDGenerico getBDGenerico = new GetBDGenerico();
-		getBDGenerico.execute(url);
+		AtualAplicDAO atualAplicDAO = new AtualAplicDAO();
+		Map<String, Object> parametrosPost = new HashMap<>();
+		parametrosPost.put("dado", atualAplicDAO.getAtualBDToken());
+
+		LogProcessoDAO.getInstance().insertLogProcesso("postBDGenerico.execute('" + classe + "');", activity);
+		PostBDGenerico postBDGenerico = new PostBDGenerico();
+		postBDGenerico.setParametrosPost(parametrosPost);
+		postBDGenerico.execute(url);
 
 	}
 
@@ -193,11 +208,7 @@ public class AtualDadosServ {
 				this.progressDialog.setProgress((contAtualBD * 100) / qtdeBD);
 			}
 
-			classe = (String) tabAtualArrayList.get(contAtualBD);
-			String[] url = {classe, activity};
-			contAtualBD++;
-			GetBDGenerico getBDGenerico = new GetBDGenerico();
-			getBDGenerico.execute(url);
+			startAtualizacao(activity);
 
 		} else {
 
@@ -219,14 +230,9 @@ public class AtualDadosServ {
 				AlertDialog.Builder alerta = new AlertDialog.Builder(this.telaAtual);
 				alerta.setTitle("ATENCAO");
 				alerta.setMessage("ATUALIZAÇÃO REALIZADA COM SUCESSO OS DADOS.");
-				alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						LogProcessoDAO.getInstance().insertLogProcesso("alerta.setPositiveButton(\"OK\", new DialogInterface.OnClickListener() {\n" +
-								"@Override\n" +
-								"public void onClick(DialogInterface dialog, int which) {", activity);
-					}
-				});
+				alerta.setPositiveButton("OK", (dialog, which) -> LogProcessoDAO.getInstance().insertLogProcesso("alerta.setPositiveButton(\"OK\", new DialogInterface.OnClickListener() {\n" +
+						"@Override\n" +
+						"public void onClick(DialogInterface dialog, int which) {", activity));
 
 				alerta.show();
 
@@ -241,18 +247,15 @@ public class AtualDadosServ {
 				AlertDialog.Builder alerta = new AlertDialog.Builder(this.telaAtual);
 				alerta.setTitle("ATENCAO");
 				alerta.setMessage("ATUALIZAÇÃO REALIZADA COM SUCESSO OS DADOS.");
-				alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						LogProcessoDAO.getInstance().insertLogProcesso("alerta.setPositiveButton(\"OK\", new DialogInterface.OnClickListener() {\n" +
-								"@Override\n" +
-								"public void onClick(DialogInterface dialog, int which) {\n" +
-								"progressDialog.dismiss();\n" +
-								"Intent it = new Intent(telaAtual, telaProx);\n" +
-								"telaAtual.startActivity(it);", activity);
-						Intent it = new Intent(telaAtual, telaProx);
-						telaAtual.startActivity(it);
-					}
+				alerta.setPositiveButton("OK", (dialog, which) -> {
+					LogProcessoDAO.getInstance().insertLogProcesso("alerta.setPositiveButton(\"OK\", new DialogInterface.OnClickListener() {\n" +
+							"@Override\n" +
+							"public void onClick(DialogInterface dialog, int which) {\n" +
+							"progressDialog.dismiss();\n" +
+							"Intent it = new Intent(telaAtual, telaProx);\n" +
+							"telaAtual.startActivity(it);", activity);
+					Intent it = new Intent(telaAtual, telaProx);
+					telaAtual.startActivity(it);
 				});
 				alerta.show();
 
@@ -265,14 +268,9 @@ public class AtualDadosServ {
 				AlertDialog.Builder alerta = new AlertDialog.Builder(telaAtual);
 				alerta.setTitle("ATENÇÃO");
 				alerta.setMessage("CÓDIGO DA SEÇÃO INCORRETO, POR FAVOR CERTIFIQUE-SE DE QUE O CÓDIGO REGISTRADO ESTÁ CORRETO OU POSSUI O.S. DE COLHEITA ABERTA E TENTE NOVAMENTE.");
-				alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						LogProcessoDAO.getInstance().insertLogProcesso("alerta.setPositiveButton(\"OK\", new DialogInterface.OnClickListener() {\n" +
-								"                            @Override\n" +
-								"                            public void onClick(DialogInterface dialog, int which) {", activity);
-					}
-				});
+				alerta.setPositiveButton("OK", (dialog, which) -> LogProcessoDAO.getInstance().insertLogProcesso("alerta.setPositiveButton(\"OK\", new DialogInterface.OnClickListener() {\n" +
+						"                            @Override\n" +
+						"                            public void onClick(DialogInterface dialog, int which) {", activity));
 				alerta.show();
 
 			}
@@ -293,14 +291,9 @@ public class AtualDadosServ {
 			AlertDialog.Builder alerta = new AlertDialog.Builder(this.telaAtual);
 			alerta.setTitle("ATENCAO");
 			alerta.setMessage("FALHA NA CONEXAO DE DADOS. O CELULAR ESTA SEM SINAL. POR FAVOR, TENTE NOVAMENTE QUANDO O CELULAR ESTIVE COM SINAL.");
-			alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					LogProcessoDAO.getInstance().insertLogProcesso("alerta.setPositiveButton(\"OK\", new DialogInterface.OnClickListener() {\n" +
-							"@Override\n" +
-							"public void onClick(DialogInterface dialog, int which) {", activity);
-				}
-			});
+			alerta.setPositiveButton("OK", (dialog, which) -> LogProcessoDAO.getInstance().insertLogProcesso("alerta.setPositiveButton(\"OK\", new DialogInterface.OnClickListener() {\n" +
+					"@Override\n" +
+					"public void onClick(DialogInterface dialog, int which) {", activity));
 			alerta.show();
 			
 		}

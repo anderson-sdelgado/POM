@@ -10,11 +10,6 @@
         android:text="@string/texto_hist_apont" />
 
     <TextView
-        android:id="@+id/textViewErroEquip"
-        style="@style/TextViewItemList"
-        android:text="@string/texto_hist_horario" />
-
-    <TextView
         android:id="@+id/textViewErroDthr"
         style="@style/TextViewItemList"
         android:text="@string/texto_hist_horario" />

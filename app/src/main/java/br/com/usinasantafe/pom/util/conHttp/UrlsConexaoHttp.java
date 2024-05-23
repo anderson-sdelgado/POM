@@ -7,8 +7,8 @@ public class UrlsConexaoHttp {
     public static String versao = "versao_" + POMContext.versaoWS.replace(".", "_");
 
 //    public static String url = "https://www.usinasantafe.com.br/pomdev/view/";
-    public static String url = "https://www.usinasantafe.com.br/pomqa/view/";
-//    public static String url = "https://www.usinasantafe.com.br/pomprod/" + versao + "/view/";
+//    public static String url = "https://www.usinasantafe.com.br/pomqa/view/";
+    public static String url = "https://www.usinasantafe.com.br/pomprod/" + versao + "/view/";
 
     public static String localPSTEstatica = "br.com.usinasantafe.pom.model.bean.estaticas.";
     public static String localUrl = "br.com.usinasantafe.pom.util.conHttp.UrlsConexaoHttp";
@@ -40,36 +40,25 @@ public class UrlsConexaoHttp {
 
     public String urlVerifica(String classe) {
         String retorno = "";
-        if (classe.equals("Equip")) {
-            retorno = url + "equip.php";
-        } else if (classe.equals("OS")) {
-            retorno = url + "pesqos.php";
-        } else if (classe.equals("Atividade")) {
-            retorno = url + "pesqativ.php";
-        } else if (classe.equals("AtividadeECM")) {
-            retorno = url + "pesqativecm.php";
-        } else if (classe.equals("OSMecan")) {
-            retorno = url + "pesqosmecan.php";
-        } else if (classe.equals("AtualParada")) {
-            retorno = url + "atualparada.php";
-        } else if (classe.equals("Atualiza")) {
-            retorno = url + "atualaplic.php";
-        } else if (classe.equals("Operador")) {
-            retorno = url + "motorista.php";
-        } else if (classe.equals("Turno")) {
-            retorno = url + "turno.php";
-        } else if (classe.equals("EquipSeg")) {
-            retorno = url + "equipseg.php";
-        } else if (classe.equals("CheckList")) {
-            retorno = url + "atualchecklist.php";
-        } else if (classe.equals("Pneu")) {
-            retorno = url + "pesqpneu.php";
-        } else if (classe.equals("Informativo")) {
-            retorno = url + "informativo.php";
-        } else if(classe.equals("OrdCarreg")){
-            retorno = url + "retcarreg.php";
-        } else if (classe.equals("CEC")) {
-            retorno = url + "retcec.php";
+        switch (classe) {
+            case "Equip":
+                retorno = url + "equip.php";
+                break;
+            case "Atualiza":
+                retorno = url + "atualaplic.php";
+                break;
+            case "Atividade":
+                retorno = url + "pesqativ.php";
+                break;
+            case "CheckList":
+                retorno = url + "atualchecklist.php";
+                break;
+            case "OS":
+                retorno = url + "pesqos.php";
+                break;
+            case "OSMecan":
+                retorno = url + "pesqosmecan.php";
+                break;
         }
         return retorno;
     }

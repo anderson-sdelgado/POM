@@ -12,6 +12,7 @@ import br.com.usinasantafe.pom.model.bean.variaveis.BoletimMMFertBean;
 import br.com.usinasantafe.pom.model.bean.variaveis.ConfigBean;
 import br.com.usinasantafe.pom.model.dao.ApontMecanDAO;
 import br.com.usinasantafe.pom.model.dao.AtividadeDAO;
+import br.com.usinasantafe.pom.model.dao.AtualAplicDAO;
 import br.com.usinasantafe.pom.model.dao.BoletimMMFertDAO;
 import br.com.usinasantafe.pom.model.dao.FuncDAO;
 import br.com.usinasantafe.pom.model.dao.LogErroDAO;
@@ -263,15 +264,17 @@ public class MotoMecFertCTR {
 
     //////////////////////////////// VERIFICAÇÃO E ATUALIZAÇÃO DE DADOS ////////////////////////////
 
-    public void verOS(String dado, Context telaAtual, Class telaProx, ProgressDialog progressDialog, String activity){
+    public void verOS(String nroOS, Context telaAtual, Class telaProx, ProgressDialog progressDialog, String activity){
         OSDAO osDAO = new OSDAO();
-        osDAO.verOS(dado, telaAtual, telaProx, progressDialog, activity);
+        AtualAplicDAO atualAplicDAO = new AtualAplicDAO();
+        osDAO.verOS(atualAplicDAO.getAtualNroOS(Long.parseLong(nroOS)), telaAtual, telaProx, progressDialog, activity);
     }
 
-    public void verAtiv(String dado, Context telaAtual, Class telaProx, ProgressDialog progressDialog){
+    public void verAtiv(Long nroOS, Context telaAtual, Class telaProx, ProgressDialog progressDialog){
         ConfigCTR configCTR = new ConfigCTR();
         AtividadeDAO atividadeDAO = new AtividadeDAO();
-        atividadeDAO.verAtiv(dado + "_" + configCTR.getEquip().getNroEquip(), telaAtual, telaProx, progressDialog);
+        AtualAplicDAO atualAplicDAO = new AtualAplicDAO();
+        atividadeDAO.verAtiv(atualAplicDAO.getAtualNroOSIdEquip(nroOS, configCTR.getEquip().getIdEquip()), telaAtual, telaProx, progressDialog);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////

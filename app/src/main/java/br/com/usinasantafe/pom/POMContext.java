@@ -17,7 +17,7 @@ public class POMContext extends Application {
     private ConfigCTR configCTR;
     private MecanicoCTR mecanicoCTR;
 
-    public static String versaoWS = "1.00";
+    public static String versaoWS = "1.02";
     public static int aplic = 1; // 1 - PMM; 2 - ECM; 3 - PCOMP
 
     @Override

@@ -13,6 +13,7 @@ import br.com.usinasantafe.pom.model.bean.estaticas.ItemOSMecanBean;
 import br.com.usinasantafe.pom.model.bean.estaticas.ServicoBean;
 import br.com.usinasantafe.pom.model.bean.variaveis.ApontMecanBean;
 import br.com.usinasantafe.pom.model.dao.ApontMecanDAO;
+import br.com.usinasantafe.pom.model.dao.AtualAplicDAO;
 import br.com.usinasantafe.pom.model.dao.BoletimMMFertDAO;
 import br.com.usinasantafe.pom.model.dao.ComponenteDAO;
 import br.com.usinasantafe.pom.model.dao.ItemOSMecanDAO;
@@ -90,10 +91,11 @@ public class MecanicoCTR {
         return osDAO.verOSMecan(nroOS, configCTR.getEquip().getIdEquip());
     }
 
-    public void verOSMecan(String dado, Context telaAtual, Class telaProx, ProgressDialog progressDialog){
+    public void verOSMecan(String nroOS, Context telaAtual, Class telaProx, ProgressDialog progressDialog){
         ConfigCTR configCTR = new ConfigCTR();
         OSDAO osDAO = new OSDAO();
-        osDAO.verOSMecan(dado + "_" + configCTR.getEquip().getIdEquip(), telaAtual, telaProx, progressDialog);
+        AtualAplicDAO atualAplicDAO = new AtualAplicDAO();
+        osDAO.verOSMecan(atualAplicDAO.getAtualNroOSIdEquip(Long.parseLong(nroOS), configCTR.getEquip().getIdEquip()), telaAtual, telaProx, progressDialog);
     }
 
     public boolean verApontMecanAberto(){

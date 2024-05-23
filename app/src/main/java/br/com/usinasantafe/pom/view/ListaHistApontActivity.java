@@ -30,17 +30,14 @@ public class ListaHistApontActivity extends ActivityGeneric {
         AdapterListHistorico adapterListHistorico = new AdapterListHistorico(this, pomContext.getMecanicoCTR().apontMecanList());
         historicoListView.setAdapter(adapterListHistorico);
 
-        buttonRetHistorico.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LogProcessoDAO.getInstance().insertLogProcesso("buttonRetHistorico.setOnClickListener(new View.OnClickListener() {\n" +
-                        "            @Override\n" +
-                        "            public void onClick(View v) {\n" +
-                        "            Intent it = new Intent(ListaHistApontActivity.this, MenuPrincPMMActivity.class);", getLocalClassName());
-                Intent it = new Intent(ListaHistApontActivity.this, MenuPrincActivity.class);
-                startActivity(it);
-                finish();
-            }
+        buttonRetHistorico.setOnClickListener(v -> {
+            LogProcessoDAO.getInstance().insertLogProcesso("buttonRetHistorico.setOnClickListener(new View.OnClickListener() {\n" +
+                    "            @Override\n" +
+                    "            public void onClick(View v) {\n" +
+                    "            Intent it = new Intent(ListaHistApontActivity.this, MenuPrincPMMActivity.class);", getLocalClassName());
+            Intent it = new Intent(ListaHistApontActivity.this, MenuPrincActivity.class);
+            startActivity(it);
+            finish();
         });
 
     }

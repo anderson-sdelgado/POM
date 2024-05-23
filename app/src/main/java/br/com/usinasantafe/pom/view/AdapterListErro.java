@@ -21,7 +21,6 @@ public class AdapterListErro extends BaseAdapter {
     private List itens;
     private LayoutInflater layoutInflater;
     private TextView textViewErroId;
-    private TextView textViewErroEquip;
     private TextView textViewErroDthr;
     private TextView textViewErroDescr;
 
@@ -50,7 +49,6 @@ public class AdapterListErro extends BaseAdapter {
 
         view = layoutInflater.inflate(R.layout.activity_item_historico, null);
         textViewErroId = view.findViewById(R.id.textViewErroId);
-        textViewErroEquip = view.findViewById(R.id.textViewErroEquip);
         textViewErroDthr = view.findViewById(R.id.textViewErroDthr);
         textViewErroDescr = view.findViewById(R.id.textViewErroDescr);
 

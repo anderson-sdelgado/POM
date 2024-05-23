@@ -43,10 +43,6 @@ public class AtividadeDAO {
         VerifDadosServ.getInstance().verifDados(dado, "Atividade", telaAtual, telaProx, progressDialog, null);
     }
 
-    public void verAtivECM(String dado, Context telaAtual, Class telaProx, ProgressDialog progressDialog){
-        VerifDadosServ.getInstance().verifDados(dado, "AtividadeECM", telaAtual, telaProx, progressDialog, null);
-    }
-
     public void recDadosAtiv(JSONArray jsonArray) throws JSONException {
 
         AtividadeBean atividadeBean = new AtividadeBean();

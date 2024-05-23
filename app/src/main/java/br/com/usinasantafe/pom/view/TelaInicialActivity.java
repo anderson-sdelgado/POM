@@ -15,6 +15,7 @@ import br.com.usinasantafe.pom.R;
 import br.com.usinasantafe.pom.model.bean.variaveis.LogErroBean;
 import br.com.usinasantafe.pom.model.bean.variaveis.LogProcessoBean;
 import br.com.usinasantafe.pom.model.dao.LogProcessoDAO;
+import br.com.usinasantafe.pom.util.ConnectNetwork;
 import br.com.usinasantafe.pom.util.EnvioDadosServ;
 import br.com.usinasantafe.pom.util.VerifDadosServ;
 
@@ -38,39 +39,36 @@ public class TelaInicialActivity extends ActivityGeneric {
 
     }
 
-    private Runnable excluirBDThread = new Runnable() {
+    private Runnable excluirBDThread = () -> {
 
-        public void run() {
+        LogProcessoDAO.getInstance().insertLogProcesso("clearBD();", getLocalClassName());
+        clearBD();
 
-            LogProcessoDAO.getInstance().insertLogProcesso("clearBD();", getLocalClassName());
-            clearBD();
-
-            if(EnvioDadosServ.getInstance().verifDadosEnvio()){
-                LogProcessoDAO.getInstance().insertLogProcesso("EnvioDadosServ.getInstance().verifDadosEnvio()", getLocalClassName());
-                if(connectNetwork){
-                    LogProcessoDAO.getInstance().insertLogProcesso("if(connectNetwork){\n" +
-                            "EnvioDadosServ.getInstance().envioDados()", getLocalClassName());
-                    EnvioDadosServ.getInstance().envioDados(getLocalClassName());
-                }
-                else{
-                    LogProcessoDAO.getInstance().insertLogProcesso("else{\n" +
-                            "                EnvioDadosServ.status = 1;", getLocalClassName());
-                    EnvioDadosServ.status = 1;
-                }
+        if(EnvioDadosServ.getInstance().verifDadosEnvio()){
+            LogProcessoDAO.getInstance().insertLogProcesso("EnvioDadosServ.getInstance().verifDadosEnvio()", getLocalClassName());
+            if(connectNetwork){
+                LogProcessoDAO.getInstance().insertLogProcesso("if(connectNetwork){\n" +
+                        "EnvioDadosServ.getInstance().envioDados()", getLocalClassName());
+                EnvioDadosServ.getInstance().envioDados(getLocalClassName());
             }
             else{
                 LogProcessoDAO.getInstance().insertLogProcesso("else{\n" +
-                        "            EnvioDadosServ.status = 3;", getLocalClassName());
-                EnvioDadosServ.status = 3;
+                        "                EnvioDadosServ.status = 1;", getLocalClassName());
+                EnvioDadosServ.status = 1;
             }
-
-            LogProcessoDAO.getInstance().insertLogProcesso("VerifDadosServ.status = 3;", getLocalClassName());
-            VerifDadosServ.status = 3;
-
-            LogProcessoDAO.getInstance().insertLogProcesso("atualizarAplic()", getLocalClassName());
-            atualizarAplic();
-
         }
+        else{
+            LogProcessoDAO.getInstance().insertLogProcesso("else{\n" +
+                    "            EnvioDadosServ.status = 3;", getLocalClassName());
+            EnvioDadosServ.status = 3;
+        }
+
+        LogProcessoDAO.getInstance().insertLogProcesso("VerifDadosServ.status = 3;", getLocalClassName());
+        VerifDadosServ.status = 3;
+
+        LogProcessoDAO.getInstance().insertLogProcesso("atualizarAplic()", getLocalClassName());
+        atualizarAplic();
+
     };
 
     public void clearBD() {
@@ -90,7 +88,7 @@ public class TelaInicialActivity extends ActivityGeneric {
 
     public void atualizarAplic(){
         LogProcessoDAO.getInstance().insertLogProcesso("public void atualizarAplic(){", getLocalClassName());
-        if (connectNetwork) {
+        if (ConnectNetwork.isConnected(this)) {
             LogProcessoDAO.getInstance().insertLogProcesso("if (connectNetwork) {", getLocalClassName());
             if (pomContext.getConfigCTR().hasElemConfig()) {
                 LogProcessoDAO.getInstance().insertLogProcesso("pomContext.getConfigCTR().hasElemConfig()\n" +
@@ -98,8 +96,7 @@ public class TelaInicialActivity extends ActivityGeneric {
                 customHandler.postDelayed(encerraAtualThread, 10000);
                 LogProcessoDAO.getInstance().insertLogProcesso("pomContext.getConfigCTR().verAtualAplic(pomContext.versaoAplic, this, getLocalClassName());", getLocalClassName());
                 pomContext.getConfigCTR().verAtualAplic(BuildConfig.VERSION_NAME, this, getLocalClassName());
-            }
-            else{
+            } else {
                 LogProcessoDAO.getInstance().insertLogProcesso("else{\n" +
                         "                VerifDadosServ.status = 3;\n" +
                         "goMenuInicial();", getLocalClassName());
@@ -115,20 +112,17 @@ public class TelaInicialActivity extends ActivityGeneric {
         }
     }
 
-    private Runnable encerraAtualThread = new Runnable() {
-
-        public void run() {
-            LogProcessoDAO.getInstance().insertLogProcesso("    private Runnable updateTimerThread = new Runnable() {\n" +
-                    "        public void run() {", getLocalClassName());
-            LogProcessoDAO.getInstance().insertLogProcesso("verifEnvio();", getLocalClassName());
-            if(VerifDadosServ.status < 3) {
-                LogProcessoDAO.getInstance().insertLogProcesso("if(VerifDadosServ.status < 3) {\n" +
-                        "VerifDadosServ.getInstance().cancel();", getLocalClassName());
-                VerifDadosServ.getInstance().cancel();
-            }
-            LogProcessoDAO.getInstance().insertLogProcesso("goMenuInicial();", getLocalClassName());
-            goMenuInicial();
+    private Runnable encerraAtualThread = () -> {
+        LogProcessoDAO.getInstance().insertLogProcesso("    private Runnable updateTimerThread = new Runnable() {\n" +
+                "        public void run() {", getLocalClassName());
+        LogProcessoDAO.getInstance().insertLogProcesso("verifEnvio();", getLocalClassName());
+        if(VerifDadosServ.status < 3) {
+            LogProcessoDAO.getInstance().insertLogProcesso("if(VerifDadosServ.status < 3) {\n" +
+                    "VerifDadosServ.getInstance().cancel();", getLocalClassName());
+            VerifDadosServ.getInstance().cancel();
         }
+        LogProcessoDAO.getInstance().insertLogProcesso("goMenuInicial();", getLocalClassName());
+        goMenuInicial();
     };
 
     public void goMenuInicial(){
@@ -166,31 +160,4 @@ public class TelaInicialActivity extends ActivityGeneric {
 
     }
 
-//    public void logProcesso(){
-//        LogProcessoBean logProcessoBean = new LogProcessoBean();
-//        List<LogProcessoBean> logProcessoList = logProcessoBean.orderBy("idLogProcesso", false);
-//        for(LogProcessoBean logProcessoBeanBD : logProcessoList){
-//            Log.i("PMM", dadosProcesso(logProcessoBeanBD));
-//        }
-//    }
-//
-//    private String dadosProcesso(LogProcessoBean logProcessoBean){
-//        Gson gsonCabec = new Gson();
-//        return gsonCabec.toJsonTree(logProcessoBean, logProcessoBean.getClass()).toString();
-//    }
-//
-//    public void logErro(){
-//        LogErroBean logErroBean = new LogErroBean();
-//        List<LogErroBean> logErroList = logErroBean.orderBy("idLogErro", false);
-//        Log.i("PMM", "Log Erro");
-//        for(LogErroBean logErroBeanBD : logErroList){
-//            Log.i("PMM", dadosErro(logErroBeanBD));
-//        }
-//    }
-//
-//    private String dadosErro(LogErroBean logErroBean){
-//        Gson gsonCabec = new Gson();
-//        return gsonCabec.toJsonTree(logErroBean, logErroBean.getClass()).toString();
-//    }
-//
 }

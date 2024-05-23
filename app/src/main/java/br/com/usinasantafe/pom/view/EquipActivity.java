@@ -33,34 +33,26 @@ public class EquipActivity extends ActivityGeneric {
         textViewCodEquip.setText(String.valueOf(pmmContext.getConfigCTR().getEquip().getNroEquip()));
         textViewDescEquip.setText(pmmContext.getConfigCTR().getEquip().getDescrClasseEquip());
 
-        buttonOkEquip.setOnClickListener(new View.OnClickListener() {
+        buttonOkEquip.setOnClickListener(v -> {
 
-            @Override
-            public void onClick(View v) {
-
-                LogProcessoDAO.getInstance().insertLogProcesso("        buttonOkEquip.setOnClickListener(new View.OnClickListener() {\n" +
-                        "            @Override\n" +
-                        "            public void onClick(View v) {\n" +
-                        "Intent it = new Intent(EquipActivity.this, ListaTurnoActivity.class);" + pmmContext.getConfigCTR().getEquip().getIdEquip() + ");", getLocalClassName());
-                Intent it = new Intent(EquipActivity.this, ListaTurnoActivity.class);
-                startActivity(it);
-                finish();
-            }
+            LogProcessoDAO.getInstance().insertLogProcesso("        buttonOkEquip.setOnClickListener(new View.OnClickListener() {\n" +
+                    "            @Override\n" +
+                    "            public void onClick(View v) {\n" +
+                    "Intent it = new Intent(EquipActivity.this, ListaTurnoActivity.class);" + pmmContext.getConfigCTR().getEquip().getIdEquip() + ");", getLocalClassName());
+            Intent it = new Intent(EquipActivity.this, ListaTurnoActivity.class);
+            startActivity(it);
+            finish();
         });
 
-        buttonCancEquip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        buttonCancEquip.setOnClickListener(v -> {
 
-                LogProcessoDAO.getInstance().insertLogProcesso("buttonCancEquip.setOnClickListener(new View.OnClickListener() {\n" +
-                        "            @Override\n" +
-                        "            public void onClick(View v) {\n" +
-                        "                    Intent it = new Intent(EquipActivity.this, OperadorActivity.class);", getLocalClassName());
-                Intent it = new Intent(EquipActivity.this, OperadorActivity.class);
-                startActivity(it);
-                finish();
-
-            }
+            LogProcessoDAO.getInstance().insertLogProcesso("buttonCancEquip.setOnClickListener(new View.OnClickListener() {\n" +
+                    "            @Override\n" +
+                    "            public void onClick(View v) {\n" +
+                    "                    Intent it = new Intent(EquipActivity.this, OperadorActivity.class);", getLocalClassName());
+            Intent it = new Intent(EquipActivity.this, OperadorActivity.class);
+            startActivity(it);
+            finish();
 
         });
 

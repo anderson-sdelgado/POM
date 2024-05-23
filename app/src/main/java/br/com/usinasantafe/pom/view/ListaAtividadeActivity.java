@@ -43,69 +43,59 @@ public class ListaAtividadeActivity extends ActivityGeneric {
         LogProcessoDAO.getInstance().insertLogProcesso("nroOS =  pmmContext.getConfigCTR().getConfig().getNroOSConfig();", getLocalClassName());
         nroOS =  pmmContext.getConfigCTR().getConfig().getNroOSConfig();
 
-        buttonAtualAtividade.setOnClickListener(new View.OnClickListener() {
+        buttonAtualAtividade.setOnClickListener(v -> {
+            LogProcessoDAO.getInstance().insertLogProcesso("buttonAtualAtividade.setOnClickListener(new View.OnClickListener() {\n" +
+                    "            @Override\n" +
+                    "            public void onClick(View v) {", getLocalClassName());
+            if (connectNetwork) {
 
-            @Override
-            public void onClick(View v) {
-                LogProcessoDAO.getInstance().insertLogProcesso("buttonAtualAtividade.setOnClickListener(new View.OnClickListener() {\n" +
-                        "            @Override\n" +
-                        "            public void onClick(View v) {", getLocalClassName());
-                if (connectNetwork) {
+                LogProcessoDAO.getInstance().insertLogProcesso("if (connectNetwork) {\n" +
+                        "                    progressBar = new ProgressDialog(v.getContext());\n" +
+                        "                    progressBar.setCancelable(true);\n" +
+                        "                    progressBar.setMessage(\"Atualizando Atividades...\");\n" +
+                        "                    progressBar.show();\n" +
+                        "                    customHandler.postDelayed(updateTimerThread, 10000);", getLocalClassName());
+                progressBar = new ProgressDialog(v.getContext());
+                progressBar.setCancelable(true);
+                progressBar.setMessage("Atualizando Atividades...");
+                progressBar.show();
 
-                    LogProcessoDAO.getInstance().insertLogProcesso("if (connectNetwork) {\n" +
-                            "                    progressBar = new ProgressDialog(v.getContext());\n" +
-                            "                    progressBar.setCancelable(true);\n" +
-                            "                    progressBar.setMessage(\"Atualizando Atividades...\");\n" +
-                            "                    progressBar.show();\n" +
-                            "                    customHandler.postDelayed(updateTimerThread, 10000);", getLocalClassName());
-                    progressBar = new ProgressDialog(v.getContext());
-                    progressBar.setCancelable(true);
-                    progressBar.setMessage("Atualizando Atividades...");
-                    progressBar.show();
+                customHandler.postDelayed(updateTimerThread, 10000);
 
-                    customHandler.postDelayed(updateTimerThread, 10000);
+                LogProcessoDAO.getInstance().insertLogProcesso("pmmContext.getMotoMecFertCTR().verAtiv(String.valueOf(" + nroOS + "), ListaAtividadeActivity.this, ListaAtividadeActivity.class, progressBar);", getLocalClassName());
+                pmmContext.getMotoMecFertCTR().verAtiv(nroOS, ListaAtividadeActivity.this, ListaAtividadeActivity.class, progressBar);
 
-                    LogProcessoDAO.getInstance().insertLogProcesso("pmmContext.getMotoMecFertCTR().verAtiv(String.valueOf(" + nroOS + "), ListaAtividadeActivity.this, ListaAtividadeActivity.class, progressBar);", getLocalClassName());
-                    pmmContext.getMotoMecFertCTR().verAtiv(String.valueOf(nroOS), ListaAtividadeActivity.this, ListaAtividadeActivity.class, progressBar);
+            } else {
 
-                } else {
-
-                    LogProcessoDAO.getInstance().insertLogProcesso("} else {\n" +
-                            "AlertDialog.Builder alerta = new AlertDialog.Builder(ListaAtividadeActivity.this);\n" +
-                            "                    alerta.setTitle(\"ATENÇÃO\");\n" +
-                            "                    alerta.setMessage(\"FALHA NA CONEXÃO DE DADOS. O CELULAR ESTA SEM SINAL. POR FAVOR, TENTE NOVAMENTE QUANDO O CELULAR ESTIVE COM SINAL.\");\n" +
-                            "                    alerta.setPositiveButton(\"OK\", new DialogInterface.OnClickListener() {\n" +
-                            "                        @Override\n" +
-                            "                        public void onClick(DialogInterface dialog, int which) {\n" +
-                            "                        }\n" +
-                            "                    });\n" +
-                            "                    alerta.show();", getLocalClassName());
-                    AlertDialog.Builder alerta = new AlertDialog.Builder(ListaAtividadeActivity.this);
-                    alerta.setTitle("ATENÇÃO");
-                    alerta.setMessage("FALHA NA CONEXÃO DE DADOS. O CELULAR ESTA SEM SINAL. POR FAVOR, TENTE NOVAMENTE QUANDO O CELULAR ESTIVE COM SINAL.");
-                    alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    });
-                    alerta.show();
-
-                }
+                LogProcessoDAO.getInstance().insertLogProcesso("} else {\n" +
+                        "AlertDialog.Builder alerta = new AlertDialog.Builder(ListaAtividadeActivity.this);\n" +
+                        "                    alerta.setTitle(\"ATENÇÃO\");\n" +
+                        "                    alerta.setMessage(\"FALHA NA CONEXÃO DE DADOS. O CELULAR ESTA SEM SINAL. POR FAVOR, TENTE NOVAMENTE QUANDO O CELULAR ESTIVE COM SINAL.\");\n" +
+                        "                    alerta.setPositiveButton(\"OK\", new DialogInterface.OnClickListener() {\n" +
+                        "                        @Override\n" +
+                        "                        public void onClick(DialogInterface dialog, int which) {\n" +
+                        "                        }\n" +
+                        "                    });\n" +
+                        "                    alerta.show();", getLocalClassName());
+                AlertDialog.Builder alerta = new AlertDialog.Builder(ListaAtividadeActivity.this);
+                alerta.setTitle("ATENÇÃO");
+                alerta.setMessage("FALHA NA CONEXÃO DE DADOS. O CELULAR ESTA SEM SINAL. POR FAVOR, TENTE NOVAMENTE QUANDO O CELULAR ESTIVE COM SINAL.");
+                alerta.setPositiveButton("OK", (dialog, which) -> {
+                });
+                alerta.show();
 
             }
+
         });
 
-        buttonRetAtividade.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LogProcessoDAO.getInstance().insertLogProcesso("buttonRetAtividade.setOnClickListener(new View.OnClickListener() {\n" +
-                        "            @Override\n" +
-                        "            public void onClick(View v) {\n" +
-                        "                Intent it = new Intent(ListaAtividadeActivity.this, OSActivity.class);", getLocalClassName());
-                Intent it = new Intent(ListaAtividadeActivity.this, OSActivity.class);
-                startActivity(it);
-                finish();
-            }
+        buttonRetAtividade.setOnClickListener(v -> {
+            LogProcessoDAO.getInstance().insertLogProcesso("buttonRetAtividade.setOnClickListener(new View.OnClickListener() {\n" +
+                    "            @Override\n" +
+                    "            public void onClick(View v) {\n" +
+                    "                Intent it = new Intent(ListaAtividadeActivity.this, OSActivity.class);", getLocalClassName());
+            Intent it = new Intent(ListaAtividadeActivity.this, OSActivity.class);
+            startActivity(it);
+            finish();
         });
 
         LogProcessoDAO.getInstance().insertLogProcesso("textViewTituloAtividade.setText(\"ATIVIDADE PRINCIPAL\");\n" +
@@ -118,7 +108,7 @@ public class ListaAtividadeActivity extends ActivityGeneric {
                 "            AtividadeBean atividadeBean = (AtividadeBean) ativArrayList.get(i);\n" +
                 "            itens.add(atividadeBean.getCodAtiv() + \" - \" + atividadeBean.getDescrAtiv());\n" +
                 "        }", getLocalClassName());
-        ArrayList<String> itens = new ArrayList<String>();
+        ArrayList<String> itens = new ArrayList<>();
         for (int i = 0; i < ativArrayList.size(); i++) {
             AtividadeBean atividadeBean = (AtividadeBean) ativArrayList.get(i);
             itens.add(atividadeBean.getCodAtiv() + " - " + atividadeBean.getDescrAtiv());
@@ -129,62 +119,53 @@ public class ListaAtividadeActivity extends ActivityGeneric {
         atividadeListView = findViewById(R.id.listAtividade);
         atividadeListView.setAdapter(adapterList);
 
-        atividadeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        atividadeListView.setOnItemClickListener((l, v, position, id) -> {
 
-            @Override
-            public void onItemClick(AdapterView<?> l, View v, int position,
-                                    long id) {
+            LogProcessoDAO.getInstance().insertLogProcesso("atividadeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {\n" +
+                    "            @Override\n" +
+                    "            public void onItemClick(AdapterView<?> l, View v, int position,\n" +
+                    "                                    long id) {", getLocalClassName());
 
-                LogProcessoDAO.getInstance().insertLogProcesso("atividadeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {\n" +
-                        "            @Override\n" +
-                        "            public void onItemClick(AdapterView<?> l, View v, int position,\n" +
-                        "                                    long id) {", getLocalClassName());
+            if(ativArrayList.size() == 0){
 
-                if(ativArrayList.size() == 0){
-
-                    LogProcessoDAO.getInstance().insertLogProcesso("if(ativArrayList.size() == 0){\n" +
-                            "AlertDialog.Builder alerta = new AlertDialog.Builder(ListaAtividadeActivity.this);\n" +
-                            "                    alerta.setTitle(\"ATENÇÃO\");\n" +
-                            "                    alerta.setMessage(\"FALHA NA SELEÇÃO DE ATIVIDADE. POR FAVOR, SELECIONE NOVAMENTE.\");\n" +
-                            "                    alerta.setPositiveButton(\"OK\", new DialogInterface.OnClickListener() {\n" +
-                            "                        @Override\n" +
-                            "                        public void onClick(DialogInterface dialog, int which) {\n" +
-                            "                            Intent it = new Intent(ListaAtividadeActivity.this, ListaAtividadeActivity.class);\n" +
-                            "                            startActivity(it);\n" +
-                            "                            finish();\n" +
-                            "                        }\n" +
-                            "                    });\n" +
-                            "                    alerta.show();", getLocalClassName());
-                    AlertDialog.Builder alerta = new AlertDialog.Builder(ListaAtividadeActivity.this);
-                    alerta.setTitle("ATENÇÃO");
-                    alerta.setMessage("FALHA NA SELEÇÃO DE ATIVIDADE. POR FAVOR, SELECIONE NOVAMENTE.");
-                    alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent it = new Intent(ListaAtividadeActivity.this, ListaAtividadeActivity.class);
-                            startActivity(it);
-                            finish();
-                        }
-                    });
-                    alerta.show();
-
-                } else {
-
-                    LogProcessoDAO.getInstance().insertLogProcesso("} else {\n" +
-                            "                    AtividadeBean atividadeBean = (AtividadeBean) ativArrayList.get(position);\n" +
-                            "                    ativArrayList.clear();\n" +
-                            "                    pmmContext.getConfigCTR().setAtivConfig(atividadeBean.getIdAtiv());\n" +
-                            "                    Intent it = new Intent(ListaAtividadeActivity.this, HorimetroActivity.class);", getLocalClassName());
-                    AtividadeBean atividadeBean = (AtividadeBean) ativArrayList.get(position);
-                    ativArrayList.clear();
-                    pmmContext.getConfigCTR().setAtivConfig(atividadeBean.getIdAtiv());
-                    Intent it = new Intent(ListaAtividadeActivity.this, HorimetroActivity.class);
+                LogProcessoDAO.getInstance().insertLogProcesso("if(ativArrayList.size() == 0){\n" +
+                        "AlertDialog.Builder alerta = new AlertDialog.Builder(ListaAtividadeActivity.this);\n" +
+                        "                    alerta.setTitle(\"ATENÇÃO\");\n" +
+                        "                    alerta.setMessage(\"FALHA NA SELEÇÃO DE ATIVIDADE. POR FAVOR, SELECIONE NOVAMENTE.\");\n" +
+                        "                    alerta.setPositiveButton(\"OK\", new DialogInterface.OnClickListener() {\n" +
+                        "                        @Override\n" +
+                        "                        public void onClick(DialogInterface dialog, int which) {\n" +
+                        "                            Intent it = new Intent(ListaAtividadeActivity.this, ListaAtividadeActivity.class);\n" +
+                        "                            startActivity(it);\n" +
+                        "                            finish();\n" +
+                        "                        }\n" +
+                        "                    });\n" +
+                        "                    alerta.show();", getLocalClassName());
+                AlertDialog.Builder alerta = new AlertDialog.Builder(ListaAtividadeActivity.this);
+                alerta.setTitle("ATENÇÃO");
+                alerta.setMessage("FALHA NA SELEÇÃO DE ATIVIDADE. POR FAVOR, SELECIONE NOVAMENTE.");
+                alerta.setPositiveButton("OK", (dialog, which) -> {
+                    Intent it = new Intent(ListaAtividadeActivity.this, ListaAtividadeActivity.class);
                     startActivity(it);
                     finish();
+                });
+                alerta.show();
 
-                }
+            } else {
+
+                LogProcessoDAO.getInstance().insertLogProcesso("} else {\n" +
+                        "                    AtividadeBean atividadeBean = (AtividadeBean) ativArrayList.get(position);\n" +
+                        "                    ativArrayList.clear();\n" +
+                        "                    pmmContext.getConfigCTR().setAtivConfig(atividadeBean.getIdAtiv());\n" +
+                        "                    Intent it = new Intent(ListaAtividadeActivity.this, HorimetroActivity.class);", getLocalClassName());
+                AtividadeBean atividadeBean = (AtividadeBean) ativArrayList.get(position);
+                ativArrayList.clear();
+                pmmContext.getConfigCTR().setAtivConfig(atividadeBean.getIdAtiv());
+                Intent it = new Intent(ListaAtividadeActivity.this, HorimetroActivity.class);
+                startActivity(it);
+                finish();
+
             }
-
         });
 
     }
@@ -222,11 +203,7 @@ public class ListaAtividadeActivity extends ActivityGeneric {
                 AlertDialog.Builder alerta = new AlertDialog.Builder(ListaAtividadeActivity.this);
                 alerta.setTitle("ATENÇÃO");
                 alerta.setMessage("FALHA DE PESQUISA DE ATIVIDADE! POR FAVOR, TENTAR NOVAMENTE COM UM SINAL MELHOR.");
-                alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
+                alerta.setPositiveButton("OK", (dialog, which) -> {});
                 alerta.show();
 
             }
